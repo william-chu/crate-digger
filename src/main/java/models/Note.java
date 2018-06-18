@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Note {
     private int id;
-    private String conent;
+    private String content;
     private long postedAt;
     private int releaseId;
 
-    public Note(String conent, int releaseId) {
-        this.conent = conent;
+    public Note(String content, int releaseId) {
+        this.content = content;
         this.releaseId = releaseId;
         this.postedAt = System.currentTimeMillis();
     }
@@ -23,11 +23,11 @@ public class Note {
     }
 
     public String getConent() {
-        return conent;
+        return content;
     }
 
     public void setConent(String conent) {
-        this.conent = conent;
+        this.content = conent;
     }
 
     public long getPostedAt() {
@@ -54,12 +54,12 @@ public class Note {
         return id == note.id &&
                 postedAt == note.postedAt &&
                 releaseId == note.releaseId &&
-                Objects.equals(conent, note.conent);
+                Objects.equals(content, note.content);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, conent, postedAt, releaseId);
+        return Objects.hash(id, content, postedAt, releaseId);
     }
 }
