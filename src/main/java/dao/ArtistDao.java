@@ -1,0 +1,28 @@
+package dao;
+
+import models.Artist;
+import models.Release;
+
+import java.util.List;
+
+public interface ArtistDao {
+    // LIST
+    List<Artist> getAll();
+    List<Release> getAllReleasesByArtistId(int artistId);
+
+    // CREATE
+    void add(Artist artist);
+    void addArtistToRelease(Artist artist, Release release);
+
+    //READ
+    Artist findById(int id);
+
+
+
+    // UPDATE
+    void update(int id, String name);
+
+    // DELETE
+    void deleteById(int id);
+    void clearAllReleasesByArtistId(int artistId);
+}
