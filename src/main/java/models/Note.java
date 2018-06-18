@@ -22,12 +22,12 @@ public class Note {
         this.id = id;
     }
 
-    public String getConent() {
+    public String getContent() {
         return content;
     }
 
-    public void setConent(String conent) {
-        this.content = conent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public long getPostedAt() {

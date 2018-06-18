@@ -22,8 +22,8 @@ public class NoteTest {
     @Test
     public void setContent() {
         Note testNote = new Note("NM lyric insert", 1);
-        testNote.setConent("spilled coffee on sleeve");
-        assertEquals("spilled coffee on sleeve", testNote.getConent());
+        testNote.setContent("spilled coffee on sleeve");
+        assertEquals("spilled coffee on sleeve", testNote.getContent());
     }
 
 
