@@ -24,5 +24,4 @@ public interface ArtistDao {
 
     // DELETE
     void deleteById(int id);
-    void clearAllReleasesByArtistId(int artistId);
 }

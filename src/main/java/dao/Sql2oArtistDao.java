@@ -9,7 +9,7 @@ import org.sql2o.Sql2oException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sql2oArtistDao implements ArtistDao{
+public class Sql2oArtistDao implements ArtistDao {
 
     private final Sql2o sql2o;
 
@@ -20,7 +20,7 @@ public class Sql2oArtistDao implements ArtistDao{
     @Override
     public void add(Artist artist) {
         String sql = "INSERT INTO artists (name, imageUrl) VALUES (:name, :imageUrl)";
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(artist)
                     .executeUpdate()
@@ -33,7 +33,7 @@ public class Sql2oArtistDao implements ArtistDao{
 
     @Override
     public List<Artist> getAll() {
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery("SELECT * FROM artists")
                     .executeAndFetch(Artist.class);
         }
@@ -50,14 +50,14 @@ public class Sql2oArtistDao implements ArtistDao{
             List<Integer> allReleasesIds = con.createQuery(joinQuery)
                     .addParameter("artistId", artistId)
                     .executeAndFetch(Integer.class);
-            for (Integer releaseId : allReleasesIds){
+            for (Integer releaseId : allReleasesIds) {
                 String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId";
                 releases.add(
                         con.createQuery(releaseQuery)
                                 .addParameter("releaseId", releaseId)
                                 .executeAndFetchFirst(Release.class));
             }
-        } catch (Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
         return releases;
@@ -71,14 +71,14 @@ public class Sql2oArtistDao implements ArtistDao{
                     .addParameter("artistId", artist.getId())
                     .addParameter("releaseId", release.getId())
                     .executeUpdate();
-        } catch (Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }
 
     @Override
     public Artist findById(int id) {
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery("SELECT * FROM artists WHERE id = :id ")
                     .addParameter("id", id)
                     .executeAndFetchFirst(Artist.class);
@@ -88,7 +88,7 @@ public class Sql2oArtistDao implements ArtistDao{
     @Override
     public void update(int id, String name, String imageUrl) {
         String sql = "UPDATE artists SET (name, imageUrl) = (:name, :imageUrl) WHERE id = :id";
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
                     .addParameter("imageUrl", imageUrl)
@@ -104,7 +104,7 @@ public class Sql2oArtistDao implements ArtistDao{
     public void deleteById(int id) {
         String sql = "DELETE from artists WHERE id = :id";
         String deleteJoin = "DELETE from artists_releases WHERE artistId = :artistId";
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .executeUpdate();
@@ -112,14 +112,10 @@ public class Sql2oArtistDao implements ArtistDao{
                     .addParameter("artistId", id)
                     .executeUpdate();
 
-        } catch (Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
 
     }
-
-    @Override
-    public void clearAllReleasesByArtistId(int artistId) {
-
-    }
 }
+

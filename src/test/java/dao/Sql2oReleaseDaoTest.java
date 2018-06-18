@@ -72,13 +72,28 @@ public class Sql2oReleaseDaoTest {
 
     @Test
     public void findById() {
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        Release foundRelease = releaseDao.findById(testRelease.getId());
+        assertEquals("Talkie Walkie", foundRelease.getTitle() );
     }
 
     @Test
     public void update() {
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        int idOfReleaseToUpdate = testRelease.getId();
+        releaseDao.update(idOfReleaseToUpdate, "England's Newest Hitmakers", "Decca", "xxx", 4, "cardboard jacket", 3, "Tom", "EP", 2000, "2010-04-04",false, "www.mtv.com");
+        assertEquals("cardboard jacket", releaseDao.findById(idOfReleaseToUpdate).getSleeveType());
     }
 
     @Test
     public void deleteById() {
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        Release testRelease2 = setupNewRelease();
+        releaseDao.add(testRelease2);
+        releaseDao.deleteById(testRelease.getId());
+        assertEquals(1, releaseDao.getAll().size());
     }
 }

@@ -66,16 +66,52 @@ public class Sql2oReleaseDao implements ReleaseDao {
 
     @Override
     public Release findById(int id) {
-        return null;
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE id = :id ")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Release.class);
+        }
     }
 
     @Override
     public void update(int id, String title, String label, String labelNumber, int mediaCondition, String sleeveType, int sleeveCondition, String seller, String mediaType, int price, String datePurchased, boolean isInCollection, String imageUrl) {
-
+        String sql = "UPDATE releases SET (title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl) = (:title, :label, :labelNumber, :mediaCondition, :sleeveType, :sleeveCondition, :seller, :mediaType, :price, :datePurchased, :isInCollection, :imageUrl) WHERE id = :id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("title", title)
+                    .addParameter("label", label)
+                    .addParameter("labelNumber", labelNumber)
+                    .addParameter("mediaCondition", mediaCondition)
+                    .addParameter("sleeveType", sleeveType)
+                    .addParameter("sleeveCondition", sleeveCondition)
+                    .addParameter("seller", seller)
+                    .addParameter("mediaType", mediaType)
+                    .addParameter("price", price)
+                    .addParameter("datePurchased", datePurchased)
+                    .addParameter("isInCollection", isInCollection)
+                    .addParameter("imageUrl", imageUrl)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void deleteById(int id) {
+        String sql = "DELETE from releases WHERE id = :id";
+        String deleteJoin = "DELETE from artists_releases WHERE releaseId = :releaseId";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+            con.createQuery(deleteJoin)
+                    .addParameter("releaseId", id)
+                    .executeUpdate();
+
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
 
     }
 }

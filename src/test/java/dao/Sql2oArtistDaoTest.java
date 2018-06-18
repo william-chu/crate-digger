@@ -90,9 +90,13 @@ public class Sql2oArtistDaoTest {
 
     @Test
     public void deleteById() {
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Artist testArtist2 = setupNewArtist();
+        artistDao.add(testArtist2);
+        artistDao.deleteById(testArtist.getId());
+        assertEquals(1, artistDao.getAll().size());
     }
 
-    @Test
-    public void clearAllReleasesByArtistId() {
-    }
+
 }
