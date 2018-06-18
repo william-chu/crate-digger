@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS releases (
   mediaType VARCHAR,
   price int,
   datePurchased VARCHAR,
-  isInCollection BINARY,
+  isInCollection BOOL,
   imageUrl VARCHAR
 );
 

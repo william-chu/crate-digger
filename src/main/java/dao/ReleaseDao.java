@@ -13,7 +13,6 @@ public interface ReleaseDao {
 
     // CREATE
     void add(Release release);
-    void addReleaseToArtist(Release release, Artist artist);
 
     //READ
     Release findById(int id);

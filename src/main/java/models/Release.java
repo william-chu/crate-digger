@@ -33,6 +33,10 @@ public class Release {
         this.imageUrl = imageUrl;
     }
 
+//    public boolean getIsInCollection() {
+//        return isInCollection;
+//    }
+
     public int getId() {
         return id;
     }

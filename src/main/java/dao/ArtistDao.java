@@ -20,7 +20,7 @@ public interface ArtistDao {
 
 
     // UPDATE
-    void update(int id, String name);
+    void update(int id, String name, String imageUrl);
 
     // DELETE
     void deleteById(int id);

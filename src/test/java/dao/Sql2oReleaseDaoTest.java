@@ -10,7 +10,8 @@ import org.sql2o.Sql2o;
 
 import static org.junit.Assert.*;
 
-public class Sql2oArtistDaoTest {
+public class Sql2oReleaseDaoTest {
+
     private Sql2oArtistDao artistDao;
     private Sql2oReleaseDao releaseDao;
     private Connection conn;
@@ -38,61 +39,46 @@ public class Sql2oArtistDaoTest {
     }
 
     @Test
-    public void addingArtistSetsId() throws Exception{
-        Artist testArtist = setupNewArtist();
-        int originalId = testArtist.getId();
-        artistDao.add(testArtist);
-        assertNotEquals(originalId, testArtist.getId());
+    public void addingReleaseSetsId() {
+        Release testRelease = setupNewRelease();
+        int originalId = testRelease.getId();
+        releaseDao.add(testRelease);
+        assertNotEquals(originalId, testRelease.getId());
     }
 
     @Test
     public void getAll() {
-        Artist testArtist = setupNewArtist();
-        Artist testArtist2 = setupNewArtist();
-        artistDao.add(testArtist);
-        artistDao.add(testArtist2);
-        assertEquals(2,  artistDao.getAll().size());
-
-
-    }
-
-    @Test
-    public void addArtistToRelease() {
-        Artist testArtist = setupNewArtist();
-        artistDao.add(testArtist);
         Release testRelease = setupNewRelease();
         releaseDao.add(testRelease);
         Release testRelease2 = setupNewRelease();
         releaseDao.add(testRelease2);
+        assertEquals(2, releaseDao.getAll().size());
+    }
+
+    @Test
+    public void getAllArtistsByReleaseId() {
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Artist testArtist2 = new Artist("The Cramps", "www.mtv2.com");
+
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
 
         artistDao.addArtistToRelease(testArtist, testRelease);
-        artistDao.addArtistToRelease(testArtist, testRelease2);
+        artistDao.addArtistToRelease(testArtist2, testRelease);
 
-        assertEquals(2, artistDao.getAllReleasesByArtistId(testArtist.getId()).size());
+        assertEquals(2, releaseDao.getAllArtistsByReleaseId(testRelease.getId()).size());
     }
 
     @Test
     public void findById() {
-        Artist testArtist = setupNewArtist();
-        artistDao.add(testArtist);
-        Artist foundArtist = artistDao.findById(testArtist.getId());
-        assertEquals("Rolling Stones", foundArtist.getName() );
     }
 
     @Test
     public void update() {
-        Artist testArtist = setupNewArtist();
-        artistDao.add(testArtist);
-        int idOfArtistToUpdate = testArtist.getId();
-        artistDao.update(idOfArtistToUpdate, "The Cramps", "www.mtv2.com");
-        assertEquals("www.mtv2.com", artistDao.findById(idOfArtistToUpdate).getImageUrl());
     }
 
     @Test
     public void deleteById() {
-    }
-
-    @Test
-    public void clearAllReleasesByArtistId() {
     }
 }
