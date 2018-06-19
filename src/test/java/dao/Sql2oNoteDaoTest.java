@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Sql2oNoteDaoTest {
@@ -56,7 +58,8 @@ public class Sql2oNoteDaoTest {
         Note testNote = setupNewNote();
         noteDao.add(testNote);
         noteDao.update(1, "cool man");
-        assertNotEquals("cool man", testNote.getContent());
+        List<Note> foundNotes = noteDao.getAllByReleaseId(1);
+        assertEquals("cool man", foundNotes.get(0).getContent());
     }
 
     @Test
