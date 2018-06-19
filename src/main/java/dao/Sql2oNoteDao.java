@@ -55,11 +55,21 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public void deleteById(int id) {
-
+        String sql = "DELETE from notes WHERE id = :id";
+        try(Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
     }
 
     @Override
-    public void clearAllNotesByRelesaseId() {
-
+    public void clearAllNotesByRelesaseId(int id) {
+        String sql = "DELETE from notes WHERE releaseId = :id";
+        try(Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
     }
 }

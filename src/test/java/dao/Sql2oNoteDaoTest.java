@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
 public class Sql2oNoteDaoTest {
 
     private Sql2oNoteDao noteDao;
-//    private Sql2oReleaseDao releaseDao;
     private Connection conn;
 
     @Before
@@ -20,7 +19,6 @@ public class Sql2oNoteDaoTest {
         String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         noteDao = new Sql2oNoteDao(sql2o);
-//        releaseDao = new Sql2oReleaseDao(sql2o);
         conn = sql2o.open();
     }
 
@@ -63,9 +61,17 @@ public class Sql2oNoteDaoTest {
 
     @Test
     public void deleteById() {
+        Note testNote = setupNewNote();
+        noteDao.add(testNote);
+        noteDao.deleteById(testNote.getId());
+        assertEquals(0, noteDao.getAllByReleaseId(1).size());
     }
 
     @Test
     public void clearAllNotesByRelesaseId() {
+        Note testNote = setupNewNote();
+        noteDao.add(testNote);
+        noteDao.clearAllNotesByRelesaseId(testNote.getReleaseId());
+        assertEquals(0, noteDao.getAllByReleaseId(1).size());
     }
 }
