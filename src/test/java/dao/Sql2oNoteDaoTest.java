@@ -54,6 +54,17 @@ public class Sql2oNoteDaoTest {
     }
 
     @Test
+    public void findById() {
+        Note testNote = setupNewNote();
+        Note testNote2 = new Note("Cool dude", 2);
+        Note testNote3 = new Note("whatever", 1);
+        noteDao.add(testNote);
+        noteDao.add(testNote2);
+        noteDao.add(testNote3);
+        assertEquals("whatever", noteDao.findById(3).getContent());
+    }
+
+    @Test
     public void update() {
         Note testNote = setupNewNote();
         noteDao.add(testNote);

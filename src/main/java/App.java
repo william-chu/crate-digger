@@ -7,7 +7,9 @@ import java.util.Map;
 
 import dao.Sql2oReleaseDao;
 import dao.Sql2oArtistDao;
+import dao.Sql2oNoteDao;
 import models.Artist;
+import models.Note;
 import models.Release;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
@@ -21,6 +23,7 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         Sql2oReleaseDao releaseDao = new Sql2oReleaseDao(sql2o);
         Sql2oArtistDao artistDao = new Sql2oArtistDao(sql2o);
+        Sql2oNoteDao noteDao = new Sql2oNoteDao(sql2o);
 
         //get: show all tasks in all categories and show all categories
         get("/", (req, res) -> {
@@ -66,6 +69,8 @@ public class App {
             int idOfReleaseToFind = Integer.parseInt(req.params("id"));
             Release release = releaseDao.findById(idOfReleaseToFind);
             List<Artist> artists = releaseDao.getAllArtistsByReleaseId(idOfReleaseToFind);
+            List<Note> notes = noteDao.getAllByReleaseId(idOfReleaseToFind);
+            model.put("notes", notes);
             model.put("artists", artists);
             model.put("release", release);
             return new ModelAndView(model, "release-detail.hbs");
@@ -78,6 +83,17 @@ public class App {
             Artist newArtist = new Artist(name, imageUrl);
             artistDao.add(newArtist);
             res.redirect("/artists");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/artists/:id/update", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            int idOfArtistToFind = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            String imageUrl = req.queryParams("imageUrl");
+            Artist newArtist = new Artist(name, imageUrl);
+            artistDao.update(idOfArtistToFind, name,imageUrl);
+            res.redirect("/artists/" + idOfArtistToFind);
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -95,11 +111,66 @@ public class App {
             String datePurchased = req.queryParams("datePurchased");
             boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
             String imageUrl = req.queryParams("imageUrl");
-
             Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
             releaseDao.add(newRelease);
             res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
+
+        post("/releases/:id/update", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            int idOfReleaseToFind = Integer.parseInt(req.params("id"));
+            String title = req.queryParams("title");
+            String label = req.queryParams("label");
+            String labelNumber = req.queryParams("labelNumber");
+            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
+            String sleeveType = req.queryParams("sleeveType");
+            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
+            String seller = req.queryParams("seller");
+            String mediaType = req.queryParams("mediaType");
+            int price = Integer.parseInt(req.queryParams("price"));
+            String datePurchased = req.queryParams("datePurchased");
+            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
+            String imageUrl = req.queryParams("imageUrl");
+            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            releaseDao.update(idOfReleaseToFind, title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            res.redirect("/releases");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/artists/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfArtistToDelete = Integer.parseInt(req.params("id"));
+            artistDao.deleteById(idOfArtistToDelete);
+            res.redirect("/artists");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/releases/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfReleaseToDelete = Integer.parseInt(req.params("id"));
+            releaseDao.deleteById(idOfReleaseToDelete);
+            res.redirect("/artists");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/releases/:id", (req, res) -> {
+            String content = req.queryParams("content");
+            int releaseId = Integer.parseInt(req.params("id"));
+            Note newNote = new Note(content, releaseId);
+            noteDao.add(newNote);
+            res.redirect("/releases/" + releaseId);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/note/:id", (req, res) -> {
+            int idOfNoteToDelete = Integer.parseInt(req.params("id"));
+            Note noteToDelete = noteDao.findById(idOfNoteToDelete);
+            int releaseId = noteToDelete.getReleaseId();
+            noteDao.deleteById(idOfNoteToDelete);
+            res.redirect("/releases/" + releaseId);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
     }
 }

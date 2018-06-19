@@ -7,6 +7,7 @@ import java.util.List;
 public interface NoteDao {
     // LIST
     List<Note> getAllByReleaseId(int id);
+    Note findById(int id);
 
     // CREATE
     void add(Note note);
