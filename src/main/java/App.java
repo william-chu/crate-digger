@@ -25,7 +25,7 @@ public class App {
         Sql2oArtistDao artistDao = new Sql2oArtistDao(sql2o);
         Sql2oNoteDao noteDao = new Sql2oNoteDao(sql2o);
 
-        //get: show all tasks in all categories and show all categories
+        //get: show recent releases
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Release> recentReleases = releaseDao.getRecent();
@@ -33,6 +33,7 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show releases in collection
         get("/releases", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Release> allReleases = releaseDao.getAll();
@@ -40,6 +41,7 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show releases in wishlist
         get("/releases/wishlist", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Release> wishlist = releaseDao.getWishlist();
@@ -47,6 +49,7 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show all artists
         get("/artists", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Artist> allArtists = artistDao.getAll();
@@ -54,6 +57,7 @@ public class App {
             return new ModelAndView(model, "artists.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show details and releases of single artist
         get("/artists/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToFind = Integer.parseInt(req.params("id"));
@@ -64,6 +68,7 @@ public class App {
             return new ModelAndView(model, "artist-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show details of specific release
         get("/releases/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToFind = Integer.parseInt(req.params("id"));
@@ -76,6 +81,7 @@ public class App {
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //post: process new artist form
         post("/artists", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("name");
@@ -86,6 +92,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: process update on specific artist
         post("/artists/:id/update", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToFind = Integer.parseInt(req.params("id"));
@@ -97,6 +104,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: process new release form
         post("/releases", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             String title = req.queryParams("title");
@@ -117,6 +125,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: process update on specific release
         post("/releases/:id/update", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToFind = Integer.parseInt(req.params("id"));
@@ -138,6 +147,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        // post:delete specific artist
         post("/artists/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToDelete = Integer.parseInt(req.params("id"));
@@ -146,6 +156,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: delete specific release
         post("/releases/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToDelete = Integer.parseInt(req.params("id"));
@@ -154,6 +165,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+
+        //post: process form to add new note
         post("/releases/:id", (req, res) -> {
             String content = req.queryParams("content");
             int releaseId = Integer.parseInt(req.params("id"));
@@ -163,6 +176,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: delete specific note
         post("/note/:id", (req, res) -> {
             int idOfNoteToDelete = Integer.parseInt(req.params("id"));
             Note noteToDelete = noteDao.findById(idOfNoteToDelete);
