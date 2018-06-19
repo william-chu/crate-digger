@@ -95,3 +95,136 @@
 .navbar .btn:hover {
   opacity: .7;
 }
+
+/* Collection Grid */
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  margin: 50px auto;
+  width: 1000px;
+}
+
+.collection-grid img {
+  background-color: lightgray;
+  width: 300px;
+  border-radius: 10px;
+}
+
+/* Album Details */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.btn-edit {
+  height: 30px;
+  background-color: #88b9b8;
+  color: #fff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.detail-cover-image {
+  height: 550px;
+  width: 550px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.artist-thumbnail {
+  height: 60px;
+  width: 60px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-social-heading {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+/* Artist Details */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.detail-cover-image {
+  height: 550px;
+  width: 550px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.album-thumbnail {
+  height: 225px;
+  width: 225px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-social-heading {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.cratemate-thumbnail {
+  height: 50px;
+  width: 50px;
+  margin: 0 5px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-thumbnail {
+  height: 50px;
+  width: 50px;
+  margin: 0 5px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
