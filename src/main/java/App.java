@@ -70,5 +70,36 @@ public class App {
             model.put("release", release);
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
+
+        post("/artists", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            String name = req.queryParams("name");
+            String imageUrl = req.queryParams("imageUrl");
+            Artist newArtist = new Artist(name, imageUrl);
+            artistDao.add(newArtist);
+            res.redirect("/artists");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        post("/releases", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            String title = req.queryParams("title");
+            String label = req.queryParams("label");
+            String labelNumber = req.queryParams("labelNumber");
+            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
+            String sleeveType = req.queryParams("sleeveType");
+            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
+            String seller = req.queryParams("seller");
+            String mediaType = req.queryParams("mediaType");
+            int price = Integer.parseInt(req.queryParams("price"));
+            String datePurchased = req.queryParams("datePurchased");
+            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
+            String imageUrl = req.queryParams("imageUrl");
+
+            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            releaseDao.add(newRelease);
+            res.redirect("/releases");
+            return null;
+        }, new HandlebarsTemplateEngine());
     }
 }
