@@ -96,4 +96,38 @@ public class Sql2oReleaseDaoTest {
         releaseDao.deleteById(testRelease.getId());
         assertEquals(1, releaseDao.getAll().size());
     }
+
+    @Test
+    public void getRecent() {
+        Release testRelease = setupNewRelease();
+        Release testRelease2 = setupNewRelease();
+        Release testRelease3 = setupNewRelease();
+        Release testRelease4 = setupNewRelease();
+        Release testRelease5 = setupNewRelease();
+        Release testRelease6 = setupNewRelease();
+        Release testRelease7 = setupNewRelease();
+        Release testRelease8 = setupNewRelease();
+        Release testRelease9 = setupNewRelease();
+        Release testRelease10 = setupNewRelease();
+        releaseDao.add(testRelease);
+        releaseDao.add(testRelease2);
+        releaseDao.add(testRelease3);
+        releaseDao.add(testRelease4);
+        releaseDao.add(testRelease5);
+        releaseDao.add(testRelease6);
+        releaseDao.add(testRelease7);
+        releaseDao.add(testRelease8);
+        releaseDao.add(testRelease9);
+        releaseDao.add(testRelease10);
+        assertEquals(10, releaseDao.getRecent().size());
+    }
+
+    @Test
+    public void getWishlist() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(false);
+        releaseDao.add(testRelease);
+        assertEquals(1, releaseDao.getWishlist().size());
+    }
+
 }

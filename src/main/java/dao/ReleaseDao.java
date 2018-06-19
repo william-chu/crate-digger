@@ -9,6 +9,8 @@ import java.util.List;
 public interface ReleaseDao {
     // LIST
     List<Release> getAll();
+    List<Release> getRecent();
+    List<Release> getWishlist();
     List<Artist> getAllArtistsByReleaseId(int releaseId);
 
     // CREATE

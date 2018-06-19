@@ -20,7 +20,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true")
                     .executeAndFetch(Release.class);
         }
     }
@@ -113,5 +113,20 @@ public class Sql2oReleaseDao implements ReleaseDao {
             System.out.println(ex);
         }
 
+    }
+
+    @Override
+    public List<Release> getRecent() {
+        try(Connection con = sql2o.open()){
+            return  con.createQuery("SELECT * FROM releases ORDER BY id DESC LIMIT 10")
+                    .executeAndFetch(Release.class);
+        }
+    }
+    @Override
+    public List<Release> getWishlist() {
+        try(Connection con = sql2o.open()){
+            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = false ")
+                    .executeAndFetch(Release.class);
+        }
     }
 }
