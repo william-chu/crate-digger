@@ -1,0 +1,97 @@
+/* Sidebar */
+
+.sidebar {
+  background-color: #dedbce;
+  width: 300px;
+  min-width: 300px;
+  border-right: 10px solid #86b9b8;
+  height: 100vh;
+  min-height: 1000px;
+  position: relative;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  padding: 25px 0;
+}
+
+.logo img {
+  width: 100px;
+  height: 100px;
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.user-profile {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.user-profile img {
+  display: block;
+  margin: 0 auto 25px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.collection-overview {
+  text-align: center;
+  background-color: #86b9b8;
+  padding: 25px;
+}
+
+.collection-overview p {
+  margin: 3px;
+}
+
+.crate-mates {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.crate-mates-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px 50px 50px;
+}
+
+.crate-mates-images img {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  display: block;
+  margin: 2px auto;
+}
+
+/* Navbar */
+
+.navbar a {
+  color: #e66a55;
+}
+
+.navbar h3 {
+  font-weight: normal;
+  margin: 0;
+}
+
+.btn-red {
+  background-color: #e66a55;
+  color: white;
+}
+
+.btn-blue {
+  background-color: #86b9b8;
+  color: white;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.navbar .btn:hover {
+  opacity: .7;
+}
