@@ -11,8 +11,10 @@
             <div class="col-lg-2">
                 <div class="sidebar">
                     <div class="logo d-flex justify-content-center">
-                        <img src="/images/icon-record.png">
-                        <h1>CRATE<br>DIGGER</h1>
+                        <a href="/">
+                            <img src="/images/icon-record.png">
+                            <h1>CRATE<br>DIGGER</h1>
+                        </a>
                     </div>
                     <div class="user-profile">
                         <img src="/images/matt-m.jpeg">
@@ -46,10 +48,10 @@
             </div>
             <div class="col-lg-10">
                 <nav class="navbar d-flex justify-content-around align-items-center">
-                    <button class="btn btn-blue" type="button">ADD RECORD</button>
-                    <a href="#"><h3>COLLECTION</h3></a>
-                    <a href="#"><h3>ARTISTS</h3></a>
-                    <a href="#"><h3>WISHLIST</h3></a>
+                    <a href="/releases/new"><button class="btn btn-blue" type="button">ADD RECORD</button></a>
+                    <a href="/releases"><h3>COLLECTION</h3></a>
+                    <a href="/artists"><h3>ARTISTS</h3></a>
+                    <a href="/releases/wishlist"><h3>WISHLIST</h3></a>
                     <button class="btn btn-red" type="button">LOG OUT</button>
                 </nav>
                 {{#block "content"}} {{/block}}

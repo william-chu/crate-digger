@@ -68,6 +68,14 @@ public class App {
             return new ModelAndView(model, "artist-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get:show new artist/release form
+        get("/releases/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Artist> allArtists = artistDao.getAll();
+            model.put("artists", allArtists);
+            return new ModelAndView(model, "release-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //get: show details of specific release
         get("/releases/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();

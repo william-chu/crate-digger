@@ -1,9 +1,126 @@
 {{#partial "content"}}
 
-
-
-<p>release-form</p>
-
+<form>
+    <h1 class="page-title">Add/Edit Album</h1>
+    <div class="form-group">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="album-ownership" value="true" checked>
+            <label class="form-check-label">Collection</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="album-ownership" value="false">
+            <label class="form-check-label">Wishlist</label>
+        </div>
+    </div>
+    <!-- START COLUMNS -->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label>Artist Name</label>
+                <input class="form-control" list="artist-list" name="artist-name">
+                <datalist id="artist-list">
+                    <option value="Artist 1">
+                    <option value="Artist 2">
+                    <option value="Artist 3">
+                </datalist>
+            </div>
+            <div class="form-group">
+                <label>Album Name</label>
+                <input class="form-control" type="text" name="album-name">
+            </div>
+            <div class="form-group indent">
+                <label>Record Label</label>
+                <input class="form-control" type="text" name="record-label">
+            </div>
+            <div class="form-group indent">
+                <label>Catalog Number</label>
+                <input class="form-control" type="text" name="catalog-number">
+            </div>
+            <div class="d-flex justify-content-between indent">
+                <div class="form-group">
+                    <label>Media Type</label>
+                    <select class="custom-select" name="media-type">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Media Condition</label>
+                    <select class="custom-select" name="media-condition">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between indent">
+                <div class="form-group">
+                    <label>Sleeve Type</label>
+                    <select class="custom-select" name="sleeve-type">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sleeve Condition</label>
+                    <select class="custom-select" name="sleeve-condition">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Seller</label>
+                <input class="form-control" type="text" name="seller">
+            </div>
+            <div class="d-flex justify-content-between indent">
+                <div class="form-group">
+                    <label>Price</label>
+                    <input class="form-control" type="number" name="price">
+                </div>
+                <div class="form-group">
+                    <label>Purchase Date</label>
+                    <input class="form-control" type="date" name="purchase-date">
+                </div>
+            </div>
+        </div>
+        <!-- 2ND COLUMN -->
+        <div class="col">
+            <label>Artist Image</label>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="artist-image-upload">
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+            </div>
+            <div class="preview-image"></div>
+            <label>Album Image</label>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="album-image-upload">
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+            </div>
+            <div class="preview-image"></div>
+        </div>
+    </div>
+    <!-- END COLUMNS -->
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea class="form-control" rows="6"></textarea>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-cancel" type="button">Cancel</button>
+        <button class="btn btn-submit" type="submit">Submit</button>
+    </div>
+</form>
 
 {{/partial}}
 

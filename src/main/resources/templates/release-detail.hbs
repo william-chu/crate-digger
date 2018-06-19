@@ -30,23 +30,21 @@
             <div class="col">
                 <h3>Media</h3>
                 <h6>Type:{{release.mediaType}}</h6>
-                <h6>Condition:
-                    <!--{{#if}}-->
-                    <!---->
-                    <!--{{/if}}-->
-                </h6>
+                <h6>Condition:{{release.mediaCondition}}</h6>
             </div>
             <div class="col">
                 <h3>Sleeve</h3>
-                <h6>Type:</h6>
-                <h6>Condition:</h6>
+                <h6>Type:{{release.sleeveType}}</h6>
+                <h6>Condition:{{release.sleeveCondition}}</h6>
             </div>
         </div>
-        <h3>Purchase Date:</h3>
-        <h6>Seller:</h6>
-        <h6>Price:</h6>
+        <h3>Purchase Date:{{release.datePurchased}}</h3>
+        <h6>Seller:{{release.seller}}</h6>
+        <h6>Price:{{release.price}}</h6>
         <h3>Notes:</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        {{#each notes}}
+            <p>{{content}}</p>
+        {{/each}}
         <div class="d-flex justify-content-end">
             <h6 class="cratemate-social-heading">Mates who own this album</h6>
         </div>

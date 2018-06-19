@@ -228,3 +228,63 @@ h1.page-title {
   background-color: lightgray;
 }
 
+/* Release form */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+label {
+  font-weight: bold;
+}
+
+form button {
+  margin: 0 10px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.form-group, .input-group{
+  margin-bottom: 25px;
+}
+
+.indent {
+  margin-left: 25px;
+}
+
+.indent .form-group {
+  width: 48%;
+}
+
+.btn-cancel {
+  background-color: #e46b59;
+}
+
+.btn-submit {
+  background-color: #88b9b8;
+}
+
+.preview-image {
+  height: 270px;
+  width: 270px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-color: lightgray;
+}
