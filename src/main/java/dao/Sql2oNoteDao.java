@@ -1,5 +1,6 @@
 package dao;
 
+import models.Artist;
 import models.Note;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -17,7 +18,11 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public List<Note> getAllByReleaseId(int id) {
-        return null;
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM notes WHERE releaseId = :id")
+                    .addParameter("id", id)
+                    .executeAndFetch(Note.class);
+        }
     }
 
     @Override
@@ -37,7 +42,15 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public void update(int id, String content) {
-
+        String sql = "UPDATE notes SET (content) = (:content) WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("content", content)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override

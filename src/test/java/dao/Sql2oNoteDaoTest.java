@@ -45,11 +45,20 @@ public class Sql2oNoteDaoTest {
     @Test
     public void getAllByReleaseId() {
         Note testNote = setupNewNote();
-
+        Note testNote2 = new Note("Cool dude", 2);
+        Note testNote3 = new Note("whatever", 1);
+        noteDao.add(testNote);
+        noteDao.add(testNote2);
+        noteDao.add(testNote3);
+        assertEquals(2, noteDao.getAllByReleaseId(1).size());
     }
 
     @Test
     public void update() {
+        Note testNote = setupNewNote();
+        noteDao.add(testNote);
+        noteDao.update(1, "cool man");
+        assertNotEquals("cool man", testNote.getContent());
     }
 
     @Test
