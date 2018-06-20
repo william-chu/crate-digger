@@ -1,9 +1,7 @@
 package dao;
 
 import models.Note;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -13,13 +11,13 @@ import static org.junit.Assert.*;
 
 public class Sql2oNoteDaoTest {
 
-    private Sql2oNoteDao noteDao;
-    private Connection conn;
+    private static Sql2oNoteDao noteDao;
+    private static Connection conn;
 
-    @Before
-    public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+    @BeforeClass
+    public static void setUp() throws Exception {
+        String connectionString = "jdbc:postgresql://localhost:5432/cratedigger_test";
+        Sql2o sql2o = new Sql2o(connectionString, null, null);
         noteDao = new Sql2oNoteDao(sql2o);
         conn = sql2o.open();
     }
@@ -31,7 +29,14 @@ public class Sql2oNoteDaoTest {
 
     @After
     public void tearDown() throws Exception {
+        System.out.println("clearing database");
+        noteDao.clearAll();
+    }
+
+    @AfterClass
+    public static void shutDown() throws Exception{
         conn.close();
+        System.out.println("connection closed");
     }
 
     @Test
@@ -61,7 +66,7 @@ public class Sql2oNoteDaoTest {
         noteDao.add(testNote);
         noteDao.add(testNote2);
         noteDao.add(testNote3);
-        assertEquals("whatever", noteDao.findById(3).getContent());
+        assertEquals("Cool dude", noteDao.findById(2).getContent());
     }
 
     @Test
@@ -87,5 +92,18 @@ public class Sql2oNoteDaoTest {
         noteDao.add(testNote);
         noteDao.clearAllNotesByRelesaseId(testNote.getReleaseId());
         assertEquals(0, noteDao.getAllByReleaseId(1).size());
+    }
+
+    @Test
+    public void clearAll() throws Exception {
+        Note testNote = setupNewNote();
+        Note testNote2 = new Note("Cool dude", 1);
+        Note testNote3 = new Note("whatever", 1);
+        noteDao.add(testNote);
+        noteDao.add(testNote2);
+        noteDao.add(testNote3);
+        noteDao.clearAll();
+        List<Note> allNotes = noteDao.getAllByReleaseId(1);
+        assertEquals(0, allNotes.size());
     }
 }

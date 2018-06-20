@@ -1,0 +1,290 @@
+/* Sidebar */
+
+.sidebar {
+  background-color: #dedbce;
+  width: 300px;
+  min-width: 300px;
+  border-right: 10px solid #86b9b8;
+  height: 100vh;
+  min-height: 1000px;
+  position: relative;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  padding: 25px 0;
+}
+
+.logo img {
+  width: 100px;
+  height: 100px;
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.user-profile {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.user-profile img {
+  display: block;
+  margin: 0 auto 25px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.collection-overview {
+  text-align: center;
+  background-color: #86b9b8;
+  padding: 25px;
+}
+
+.collection-overview p {
+  margin: 3px;
+}
+
+.crate-mates {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.crate-mates-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px 50px 50px;
+}
+
+.crate-mates-images img {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  display: block;
+  margin: 2px auto;
+}
+
+/* Navbar */
+
+.navbar a {
+  color: #e66a55;
+}
+
+.navbar h3 {
+  font-weight: normal;
+  margin: 0;
+}
+
+.btn-red {
+  background-color: #e66a55;
+  color: white;
+}
+
+.btn-blue {
+  background-color: #86b9b8;
+  color: white;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.navbar .btn:hover {
+  opacity: .7;
+}
+
+/* Collection Grid */
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  margin: 50px auto;
+  width: 1000px;
+}
+
+.collection-grid img {
+  background-color: lightgray;
+  width: 300px;
+  border-radius: 10px;
+}
+
+/* Album Details */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.btn-edit {
+  height: 30px;
+  background-color: #88b9b8;
+  color: #fff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.detail-cover-image {
+  height: 550px;
+  width: 550px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.artist-thumbnail {
+  height: 60px;
+  width: 60px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-social-heading {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+/* Artist Details */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.detail-cover-image {
+  height: 550px;
+  width: 550px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.album-thumbnail {
+  height: 225px;
+  width: 225px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-social-heading {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.cratemate-thumbnail {
+  height: 50px;
+  width: 50px;
+  margin: 0 5px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.cratemate-thumbnail {
+  height: 50px;
+  width: 50px;
+  margin: 0 5px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+/* Release form */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 20px 0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 2.15rem;
+}
+
+h1.page-title {
+  color: #88b9b8;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+}
+
+label {
+  font-weight: bold;
+}
+
+form button {
+  margin: 0 10px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.form-group, .input-group{
+  margin-bottom: 25px;
+}
+
+.indent {
+  margin-left: 25px;
+}
+
+.indent .form-group {
+  width: 48%;
+}
+
+.btn-cancel {
+  background-color: #e46b59;
+}
+
+.btn-submit {
+  background-color: #88b9b8;
+}
+
+.preview-image {
+  height: 270px;
+  width: 270px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-color: lightgray;
+}

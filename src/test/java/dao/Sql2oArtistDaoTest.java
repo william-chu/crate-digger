@@ -2,23 +2,21 @@ package dao;
 
 import models.Artist;
 import models.Release;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import static org.junit.Assert.*;
 
 public class Sql2oArtistDaoTest {
-    private Sql2oArtistDao artistDao;
-    private Sql2oReleaseDao releaseDao;
-    private Connection conn;
+    private static Sql2oArtistDao artistDao;
+    private static Sql2oReleaseDao releaseDao;
+    private static Connection conn;
 
-    @Before
-    public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+    @BeforeClass
+    public static void setUp() throws Exception {
+        String connectionString = "jdbc:postgresql://localhost:5432/cratedigger_test";
+        Sql2o sql2o = new Sql2o(connectionString, null, null);
         artistDao = new Sql2oArtistDao(sql2o);
         releaseDao = new Sql2oReleaseDao(sql2o);
         conn = sql2o.open();
@@ -34,7 +32,15 @@ public class Sql2oArtistDaoTest {
 
     @After
     public void tearDown() throws Exception {
+        System.out.println("clearing database");
+        artistDao.clearAll();
+        releaseDao.clearAll();
+    }
+
+    @AfterClass
+    public static void shutDown() throws Exception{
         conn.close();
+        System.out.println("connection closed");
     }
 
     @Test

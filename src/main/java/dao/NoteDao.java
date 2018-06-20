@@ -19,4 +19,5 @@ public interface NoteDao {
     // DELETE
     void deleteById(int id);
     void clearAllNotesByRelesaseId( int id);
+    void clearAll();
 }

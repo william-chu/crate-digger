@@ -39,7 +39,7 @@ public class Sql2oTrackDao implements TrackDao {
 
     @Override
     public void update(int id, String title) {
-        String sql = "UPDATE tracks SET (title) = (:title) WHERE id = :id";
+        String sql = "UPDATE tracks SET title = :title WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("title", title)
@@ -68,5 +68,17 @@ public class Sql2oTrackDao implements TrackDao {
                     .addParameter("id", id)
                     .executeUpdate();
         }
+    }
+
+    @Override
+    public void clearAll() {
+        String sql = "DELETE from tracks";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+
     }
 }

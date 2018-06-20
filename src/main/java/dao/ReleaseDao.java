@@ -26,4 +26,5 @@ public interface ReleaseDao {
 
     // DELETE
     void deleteById(int id);
+    void clearAll();
 }

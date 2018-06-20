@@ -3,9 +3,7 @@ package dao;
 import models.Track;
 import models.Track;
 import models.Track;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -14,13 +12,13 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class Sql2oTrackDaoTest {
-    private Sql2oTrackDao trackDao;
-    private Connection conn;
+    private static Sql2oTrackDao trackDao;
+    private static Connection conn;
 
-    @Before
-    public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+    @BeforeClass
+    public static void setUp() throws Exception {
+        String connectionString = "jdbc:postgresql://localhost:5432/cratedigger_test";
+        Sql2o sql2o = new Sql2o(connectionString, null, null);
         trackDao = new Sql2oTrackDao(sql2o);
         conn = sql2o.open();
     }
@@ -31,7 +29,14 @@ public class Sql2oTrackDaoTest {
 
     @After
     public void tearDown() throws Exception {
+        System.out.println("clearing database");
+        trackDao.clearAll();
+    }
+
+    @AfterClass
+    public static void shutDown() throws Exception{
         conn.close();
+        System.out.println("connection closed");
     }
     
 

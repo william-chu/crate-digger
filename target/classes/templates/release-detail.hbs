@@ -1,0 +1,61 @@
+{{#partial "content"}}
+
+<div class="d-flex justify-content-end">
+    <button class="btn btn-edit" type="button" name="button">Edit</button>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="detail-cover-image"></div>
+        <h1 class="page-title">{{release.title}}</h1>
+        <div class="d-flex justify-content-start align-items-center">
+            <div class="artist-thumbnail"></div>
+            {{#each artists}}
+            <h1>{{name}}</h1>
+            {{/each}}
+        </div>
+        <h6>{{release.label}} - {{release.labelNumber}}</h6>
+        <h3>Tracks</h3>
+        <ol>
+            <li>Track Title 1</li>
+            <li>Track Title 2</li>
+            <li>Track Title 3</li>
+            <li>Track Title 4</li>
+            <li>Track Title 5</li>
+            <li>Track Title 6</li>
+        </ol>
+    </div>
+    <!-- 2ND COLUMN -->
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h3>Media</h3>
+                <h6>Type:{{release.mediaType}}</h6>
+                <h6>Condition:{{release.mediaCondition}}</h6>
+            </div>
+            <div class="col">
+                <h3>Sleeve</h3>
+                <h6>Type:{{release.sleeveType}}</h6>
+                <h6>Condition:{{release.sleeveCondition}}</h6>
+            </div>
+        </div>
+        <h3>Purchase Date:{{release.datePurchased}}</h3>
+        <h6>Seller:{{release.seller}}</h6>
+        <h6>Price:{{release.price}}</h6>
+        <h3>Notes:</h3>
+        {{#each notes}}
+            <p>{{content}}</p>
+        {{/each}}
+        <div class="d-flex justify-content-end">
+            <h6 class="cratemate-social-heading">Mates who own this album</h6>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div class="cratemate-thumbnail"></div>
+            <div class="cratemate-thumbnail"></div>
+            <div class="cratemate-thumbnail"></div>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}

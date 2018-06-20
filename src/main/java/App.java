@@ -27,8 +27,8 @@ public class App {
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/cratedigger.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/cratedigger";
+        Sql2o sql2o = new Sql2o(connectionString, null, null);
         Sql2oReleaseDao releaseDao = new Sql2oReleaseDao(sql2o);
         Sql2oArtistDao artistDao = new Sql2oArtistDao(sql2o);
         Sql2oNoteDao noteDao = new Sql2oNoteDao(sql2o);

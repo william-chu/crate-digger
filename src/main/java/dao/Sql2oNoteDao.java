@@ -42,9 +42,9 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public Note findById(int id) {
-        String sql = "SELECT * from notes WHERE id = :id";
+//        String sql = "SELECT * from notes WHERE id = :id";
         try(Connection con = sql2o.open()) {
-            return con.createQuery(sql)
+            return con.createQuery("SELECT * from notes WHERE id = :id")
                     .addParameter("id", id)
                     .executeAndFetchFirst(Note.class);
         }
@@ -52,7 +52,7 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public void update(int id, String content) {
-        String sql = "UPDATE notes SET (content) = (:content) WHERE id = :id";
+        String sql = "UPDATE notes SET content = :content WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("content", content)
@@ -81,5 +81,17 @@ public class Sql2oNoteDao implements NoteDao {
                     .addParameter("id", id)
                     .executeUpdate();
         }
+    }
+
+    @Override
+    public void clearAll() {
+        String sql = "DELETE from notes";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+
     }
 }
