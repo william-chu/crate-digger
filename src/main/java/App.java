@@ -27,6 +27,7 @@ public class App {
         return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
+
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
@@ -40,9 +41,21 @@ public class App {
         //get: show recent releases
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             List<Release> recentReleases = releaseDao.getRecent();
-            int releaseSize = releaseDao.getAll().size();
-            int artistsize =  artistDao.getAll().size();
             model.put("releases", recentReleases);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
@@ -168,7 +181,9 @@ public class App {
             String content = req.queryParams("content");
             int releaseId = release.getId();
             Note newNote = new Note(content, releaseId);
-            noteDao.add(newNote);
+            if (!newNote.getContent().equals("")) {
+                noteDao.add(newNote);
+            }
             res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -272,4 +287,6 @@ public class App {
         }
         return result;
     }
+
+
 }

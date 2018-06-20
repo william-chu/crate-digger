@@ -28,7 +28,10 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAllEps() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 12\" EP OR mediaType = EP OR mediaType = 10\"")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :large OR mediaType = :small OR mediaType = :medium")
+                    .addParameter("large", "12\"")
+                    .addParameter("small", "EP")
+                    .addParameter("medium", "10\"")
                     .executeAndFetch(Release.class);
         }
     }
@@ -36,14 +39,17 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAllLps() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = LP")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :lp")
+                    .addParameter("lp", "LP")
                     .executeAndFetch(Release.class);
         }
     }
     @Override
     public List<Release> getAllSingles() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 12\" Single OR mediaType = Single")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :large OR mediaType = :small")
+                    .addParameter("large", "12\" Single")
+                    .addParameter("small", "Single")
                     .executeAndFetch(Release.class);
         }
     }
@@ -51,8 +57,22 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAllSeventies() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 78 RPM")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :rpm")
+                    .addParameter("rpm", "78 RPM")
                     .executeAndFetch(Release.class);
+        }
+    }
+
+    @Override
+    public int getTotalValue() {
+        try(Connection con = sql2o.open()){
+            List<Release> releases = con.createQuery("SELECT * FROM releases WHERE isInCollection = true")
+                    .executeAndFetch(Release.class);
+            int total = 0;
+            for (Release release:releases) {
+                total += release.getPrice();
+            }
+            return total;
         }
     }
 
