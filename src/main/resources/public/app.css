@@ -2,10 +2,11 @@
 
 html, body {
   height: 100%;
+  font-size: 100%;
 }
 
 h1, h2, h3, h4, h5 ,h6 {
-  margin: 20px 0;
+  margin: 10px 0 20px;
 }
 
 h1 {
@@ -97,19 +98,19 @@ h1.page-title {
 
 .crate-mates-images img {
   width: 100%;
-  border-radius: 3px;
+  border-radius: 100%;
 }
 
 /* UI Dashboard - Navbar */
 
-nav {
-  margin: 10px 0;
+.navbar {
+  margin: 20px 0 50px;
+  padding: 0;
 }
 
 .navbar a {
   display: inline-block;
   padding: 5px 15px;
-  margin: 0 5px;
   border-radius: 5px;
   outline: none;
   text-decoration: none;
@@ -155,44 +156,15 @@ nav {
   border-radius: 5px;
 }
 
-/* Album Details */
+/* Details */
 
-li {
-  margin-bottom: 15px;
+.font-normal {
+  font-weight: normal;
 }
-
-.container {
-  padding-top: 50px;
-}
-
-.btn-edit {
-  height: 30px;
-  background-color: #88b9b8;
-  color: #fff;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-.artist-thumbnail {
-  height: 60px;
-  width: 60px;
-  margin-right: 20px;
-  border-radius: 10px;
-  background-color: lightgray;
-}
-
-/* Artist Details */
 
 .detail-cover-image img{
   width: 100%;
   border-radius: 5px;
-}
-
-.album-thumbnail {
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 10px;
-  background-color: lightgray;
 }
 
 .cratemate-social-heading {
@@ -210,6 +182,61 @@ li {
 .cratemate-thumbnail img{
   width: 100%;
   border-radius: 10px;
+}
+
+/* Details - Album */
+
+.track-list {
+  padding-left: 30px;
+}
+
+.track-list li {
+  margin-bottom: 15px;
+}
+
+.btn-edit {
+   height: 30px;
+   background-color: #88b9b8;
+   color: #fff;
+   font-size: 0.75rem;
+   line-height: 100%;
+   text-transform: uppercase;
+}
+
+.btn-delete {
+  opacity: 0;
+  height: 20px;
+  margin-left: 10px;
+  padding: 0 5px;
+  background-color: #c7002e;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+p:hover .btn-delete, li:hover .btn-delete {
+  opacity: 1;
+}
+
+.artist-thumbnail {
+  height: 60px;
+  width: 60px;
+  margin-right: 20px;
+}
+
+.artist-thumbnail img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Artist Details */
+
+.album-thumbnail {
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: lightgray;
 }
 
 /* Release Form */
