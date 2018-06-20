@@ -1,7 +1,7 @@
 {{#partial "content"}}
 
 <div class="row">
-    <div class="col">
+    <div class="col-12 col-lg-6 col-xl-4">
         <div class="detail-cover-image"><img src="{{artist.imageUrl}}"></div>
         <h1 class="page-title">{{artist.name}}</h1>
         <p><strong>Biography</strong>: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -9,15 +9,15 @@
             <h6 class="cratemate-social-heading">Mates who own this album</h6>
         </div>
         <div class="d-flex justify-content-end">
-            <div class="cratemate-thumbnail"></div>
-            <div class="cratemate-thumbnail"></div>
-            <div class="cratemate-thumbnail"></div>
+            <div class="cratemate-thumbnail"><img src="/images/matt-m.jpeg"></div>
+            <div class="cratemate-thumbnail"><img src="/images/matt-m.jpeg"></div>
+            <div class="cratemate-thumbnail"><img src="/images/matt-m.jpeg"></div>
         </div>
     </div>
     <!-- 2ND COLUMN -->
-    <div class="col">
+    <div class="col-12 col-lg-6 col-xl-8">
         <h1>In Collection</h1>
-        <div class="d-flex justify-content-start">
+        <div class="collection-grid">
             {{#each releases}}
                 <div class="album-thumbnail"><img src="{{imageUrl}}"></div>
             {{/each}}
