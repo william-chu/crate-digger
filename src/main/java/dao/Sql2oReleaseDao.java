@@ -26,6 +26,37 @@ public class Sql2oReleaseDao implements ReleaseDao {
     }
 
     @Override
+    public List<Release> getAllEps() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 12\" EP OR mediaType = EP OR mediaType = 10\"")
+                    .executeAndFetch(Release.class);
+        }
+    }
+
+    @Override
+    public List<Release> getAllLps() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = LP")
+                    .executeAndFetch(Release.class);
+        }
+    }
+    @Override
+    public List<Release> getAllSingles() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 12\" Single OR mediaType = Single")
+                    .executeAndFetch(Release.class);
+        }
+    }
+
+    @Override
+    public List<Release> getAllSeventies() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = 78 RPM")
+                    .executeAndFetch(Release.class);
+        }
+    }
+
+    @Override
     public List<Artist> getAllArtistsByReleaseId(int releaseId) {
         ArrayList<Artist> artists = new ArrayList<>();
 

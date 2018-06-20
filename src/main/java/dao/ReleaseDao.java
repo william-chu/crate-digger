@@ -12,6 +12,11 @@ public interface ReleaseDao {
     List<Release> getRecent();
     List<Release> getWishlist();
     List<Artist> getAllArtistsByReleaseId(int releaseId);
+    List<Release> getAllLps();
+    List<Release> getAllEps();
+    List<Release> getAllSingles();
+    List<Release> getAllSeventies();
+
 
     // CREATE
     void add(Release release);

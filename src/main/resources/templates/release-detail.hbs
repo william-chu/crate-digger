@@ -1,7 +1,7 @@
 {{#partial "content"}}
 {{#if release.isInCollection}}
     <div class="form-group d-flex justify-content-end">
-        <button class="btn btn-edit" type="button" name="button">Edit</button>
+        <a href="/releases/{{release.id}}/update"><button class="btn btn-edit" type="button" name="button">Edit</button></a>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 col-xl-4">
@@ -9,8 +9,10 @@
             <h1 class="page-title">{{release.title}}</h1>
             <div class="d-flex justify-content-start align-items-center">
                 {{#each artists}}
-                    <div class="artist-thumbnail"><img src="{{imageUrl}}"></div>
-                    <h1>{{name}}</h1>
+                    <a href="/artists/{{id}}">
+                        <div class="artist-thumbnail"><img src="{{imageUrl}}"></div>
+                        <h1>{{name}}</h1>
+                    </a>
                 {{/each}}
             </div>
             <h6>{{release.label}} {{release.labelNumber}}</h6>
@@ -81,8 +83,10 @@
             <h1 class="page-title">{{release.title}}</h1>
             <div class="d-flex justify-content-start align-items-center">
                 {{#each artists}}
-                    <div class="artist-thumbnail"><img src="{{imageUrl}}"></div>
-                    <h1>{{name}}</h1>
+                    <a href="/artists/{{id}}">
+                        <div class="artist-thumbnail"><img src="{{imageUrl}}"></div>
+                        <h1>{{name}}</h1>
+                    </a>
                 {{/each}}
             </div>
             <h6>{{release.label}} {{release.labelNumber}}</h6>

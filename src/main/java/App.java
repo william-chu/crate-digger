@@ -41,6 +41,8 @@ public class App {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Release> recentReleases = releaseDao.getRecent();
+            int releaseSize = releaseDao.getAll().size();
+            int artistsize =  artistDao.getAll().size();
             model.put("releases", recentReleases);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
@@ -109,12 +111,23 @@ public class App {
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: update form for specific artist
+        get("/artists/:id/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfArtistToUpdate = Integer.parseInt(req.params("id"));
+            Artist editArtist = artistDao.findById(idOfArtistToUpdate);
+            model.put("editArtist", editArtist);
+            List<Artist> artists = artistDao.getAll();
+            model.put("artists", artists);
+            return new ModelAndView(model, "release-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //post: process update on specific artist
         post("/artists/:id/update", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToFind = Integer.parseInt(req.params("id"));
-            String name = req.queryParams("name");
-            String imageUrl = req.queryParams("imageUrl");
+            String name = req.queryParams("artistName");
+            String imageUrl = req.queryParams("artistImageUrl");
             Artist newArtist = new Artist(name, imageUrl);
             artistDao.update(idOfArtistToFind, name,imageUrl);
             res.redirect("/artists/" + idOfArtistToFind);
@@ -160,6 +173,15 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //get: update form for specific release
+        get("/releases/:id/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfReleaseToUpdate = Integer.parseInt(req.params("id"));
+            Release editRelease = releaseDao.findById(idOfReleaseToUpdate);
+            model.put("editRelease", editRelease);
+            return new ModelAndView(model, "release-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //post: process update on specific release
         post("/releases/:id/update", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
@@ -175,10 +197,10 @@ public class App {
             int price = Integer.parseInt(req.queryParams("price"));
             String datePurchased = req.queryParams("datePurchased");
             boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
-            String imageUrl = req.queryParams("imageUrl");
+            String imageUrl = req.queryParams("releaseImageUrl");
             Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
             releaseDao.update(idOfReleaseToFind, title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
-            res.redirect("/releases");
+            res.redirect("/releases/" + idOfReleaseToFind);
             return null;
         }, new HandlebarsTemplateEngine());
 
