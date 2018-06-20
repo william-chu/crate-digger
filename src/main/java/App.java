@@ -8,9 +8,11 @@ import java.util.Map;
 import dao.Sql2oReleaseDao;
 import dao.Sql2oArtistDao;
 import dao.Sql2oNoteDao;
+import dao.Sql2oTrackDao;
 import models.Artist;
 import models.Note;
 import models.Release;
+import models.Track;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -24,6 +26,7 @@ public class App {
         }
         return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
+
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
@@ -32,6 +35,7 @@ public class App {
         Sql2oReleaseDao releaseDao = new Sql2oReleaseDao(sql2o);
         Sql2oArtistDao artistDao = new Sql2oArtistDao(sql2o);
         Sql2oNoteDao noteDao = new Sql2oNoteDao(sql2o);
+        Sql2oTrackDao trackDao = new Sql2oTrackDao(sql2o);
 
         //get: show recent releases
         get("/", (req, res) -> {
@@ -46,7 +50,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Release> allReleases = releaseDao.getAll();
             model.put("releases", allReleases);
-            return new ModelAndView(model, "index.hbs");
+            return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 
         //get: show releases in wishlist
@@ -54,7 +58,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Release> wishlist = releaseDao.getWishlist();
             model.put("wishlist", wishlist);
-            return new ModelAndView(model, "index.hbs");
+            return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 
         //get: show all artists
@@ -93,9 +97,15 @@ public class App {
             Release release = releaseDao.findById(idOfReleaseToFind);
             List<Artist> artists = releaseDao.getAllArtistsByReleaseId(idOfReleaseToFind);
             List<Note> notes = noteDao.getAllByReleaseId(idOfReleaseToFind);
+            List<Track> tracks = trackDao.getAllByReleaseId(idOfReleaseToFind);
+            String sleeveCondition = condition(release.getSleeveCondition());
+            String mediaCondition = condition(release.getMediaCondition());
             model.put("notes", notes);
             model.put("artists", artists);
             model.put("release", release);
+            model.put("tracks", tracks);
+            model.put("sleeveCondition", sleeveCondition);
+            model.put("mediaCondition", mediaCondition);
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -192,7 +202,7 @@ public class App {
 
 
         //post: process form to add new note
-        post("/releases/:id", (req, res) -> {
+        post("/releases/:id/notes", (req, res) -> {
             String content = req.queryParams("content");
             int releaseId = Integer.parseInt(req.params("id"));
             Note newNote = new Note(content, releaseId);
@@ -211,5 +221,33 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //post: process form to add new track
+        post("/releases/:id/tracks", (req, res) -> {
+            String title = req.queryParams("title");
+            int releaseId = Integer.parseInt(req.params("id"));
+            Track newTrack = new Track(title, releaseId);
+            trackDao.add(newTrack);
+            res.redirect("/releases/" + releaseId);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+    }
+
+    public static String condition(int conditionAsNumber) {
+        String result = "";
+        if (conditionAsNumber == 1) {
+            result = "P";
+        } else if (conditionAsNumber == 2) {
+            result = "G";
+        } else if (conditionAsNumber == 3) {
+            result = "VG-";
+        } else if (conditionAsNumber == 4) {
+            result = "VG";
+        } else if (conditionAsNumber == 5) {
+            result = "VG+";
+        } else if(conditionAsNumber == 6) {
+            result = "NM";
+        }
+        return result;
     }
 }

@@ -1,5 +1,7 @@
 package models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Note {
@@ -36,6 +38,13 @@ public class Note {
 
     public void setPostedAt(long postedAt) {
         this.postedAt = postedAt;
+    }
+
+    public String getFormattedCreatedAt(){
+        Date date = new Date(postedAt);
+        String datePatternToUse = "yyyy/MM/dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
+        return sdf.format(date);
     }
 
     public int getReleaseId() {
