@@ -22,13 +22,13 @@
         <h1>In Collection</h1>
         <div class="collection-grid">
             {{#each releases}}
-                <div class="album-thumbnail"><img src="{{imageUrl}}"></div>
+                <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
             {{/each}}
         </div>
         <h1>Wishlist</h1>
         <div class="d-flex justify-content-start">
             {{#each wishlist}}
-                <div class="album-thumbnail"><img src="{{imageUrl}}"></div>
+                <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
             {{/each}}
         </div>
     </div>

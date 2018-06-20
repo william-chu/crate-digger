@@ -41,6 +41,8 @@ public class App {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Release> recentReleases = releaseDao.getRecent();
+            int releaseSize = releaseDao.getAll().size();
+            int artistsize =  artistDao.getAll().size();
             model.put("releases", recentReleases);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
