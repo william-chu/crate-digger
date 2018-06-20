@@ -6,57 +6,58 @@
     <link rel='stylesheet' href='/app.css'>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="sidebar">
-                    <div class="logo d-flex justify-content-center">
-                        <a href="/">
-                            <img src="/images/icon-record.png">
-                            <h1>CRATE<br>DIGGER</h1>
-                        </a>
-                    </div>
-                    <div class="user-profile">
-                        <img src="/images/matt-m.jpeg">
-                        <h2>Matt M.</h2>
-                        <h6>Member since 1999</h6>
-                    </div>
-                    <div class="collection-overview">
-                        <h6>COLLECTION OVERVIEW</h6>
-                        <p>Collection Value: $1999</p>
-                        <p>Records: 123</p>
-                        <p>Artists: 101</p>
-                        <p>Singles 56</p>
-                        <p>LPs: 45</p>
-                        <p>EPs: 22</p>
-                    </div>
-                    <div class="crate-mates">
-                        <h6 class="text-center">CRATE MATES</h6>
-                        <div class="crate-mates-images">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                            <img src="/images/matt-m.jpeg">
-                        </div>
-                    </div>
+    <div id="ui-dashboard">
+        <!-- SIDEBAR -->
+        <section class="sidebar">
+            <div class="logo">
+                <a href="#" class="d-flex justify-content-center align-items-center">
+                    <img src="/images/icon-record.png">
+                    <h1>CRATE<br>DIGGER</h1>
+                </a>
+            </div>
+            <div class="user-profile">
+                <img src="/images/matt-m.jpeg">
+                <h2>Matt M.</h2>
+                <h6>Member since 1999</h6>
+            </div>
+            <div class="collection-overview">
+                <h6>COLLECTION OVERVIEW</h6>
+                <p>Collection Value: $1999</p>
+                <p>Records: 123</p>
+                <p>Artists: 101</p>
+                <p>Singles 56</p>
+                <p>LPs: 45</p>
+                <p>EPs: 22</p>
+            </div>
+            <div class="crate-mates">
+                <h6 class="text-center">CRATE MATES</h6>
+                <div class="crate-mates-images">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
+                    <img src="/images/matt-m.jpeg">
                 </div>
             </div>
-            <div class="col-lg-10">
-                <nav class="navbar d-flex justify-content-around align-items-center">
-                    <a href="/releases/new"><button class="btn btn-blue" type="button">ADD RECORD</button></a>
-                    <a href="/releases"><h3>COLLECTION</h3></a>
-                    <a href="/artists"><h3>ARTISTS</h3></a>
-                    <a href="/releases/wishlist"><h3>WISHLIST</h3></a>
-                    <button class="btn btn-red" type="button">LOG OUT</button>
-                </nav>
-                {{#block "content"}} {{/block}}
-            </div>
-        </div>
+        </section>
+        <!-- NAVBAR -->
+        <section class="main">
+            <nav class="navbar d-flex justify-content-between align-items-center">
+                <a class="button-blue" href="/releases/new">Add Record</a>
+                <div>
+                    <a class="button-hollow" href="/releases">Collection</a>
+                    <a class="button-hollow" href="/artists">Artists</a>
+                    <a class="button-hollow" href="/releases/wishlist">Wishlist</a>
+                </div>
+                <!-- <a class="button-logout" href="#logout">Logout</a> -->
+            </nav>
+            <!-- MAIN CONTENT -->
+            {{#block "content"}} {{/block}}
+        </section>
     </div>
     <!--begin main template-->
 
