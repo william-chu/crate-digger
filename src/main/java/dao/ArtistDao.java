@@ -16,6 +16,7 @@ public interface ArtistDao {
 
     //READ
     Artist findById(int id);
+    Artist findByName(String name);
 
 
 

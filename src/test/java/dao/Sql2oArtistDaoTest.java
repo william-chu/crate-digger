@@ -86,6 +86,14 @@ public class Sql2oArtistDaoTest {
     }
 
     @Test
+    public void findByName() {
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Artist foundArtist = artistDao.findByName(testArtist.getName());
+        assertEquals("Rolling Stones", foundArtist.getName() );
+    }
+
+    @Test
     public void update() {
         Artist testArtist = setupNewArtist();
         artistDao.add(testArtist);

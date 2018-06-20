@@ -86,6 +86,15 @@ public class Sql2oArtistDao implements ArtistDao {
     }
 
     @Override
+    public Artist findByName(String name) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM artists WHERE name = :name ")
+                    .addParameter("name", name)
+                    .executeAndFetchFirst(Artist.class);
+        }
+    }
+
+    @Override
     public void update(int id, String name, String imageUrl) {
         String sql = "UPDATE artists SET (name, imageUrl) = (:name, :imageUrl) WHERE id = :id";
         try (Connection con = sql2o.open()) {

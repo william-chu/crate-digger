@@ -97,16 +97,16 @@ public class App {
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process new artist form
-        post("/artists", (req, res) -> { //new
-            Map<String, Object> model = new HashMap<>();
-            String name = req.queryParams("name");
-            String imageUrl = req.queryParams("imageUrl");
-            Artist newArtist = new Artist(name, imageUrl);
-            artistDao.add(newArtist);
-            res.redirect("/artists");
-            return null;
-        }, new HandlebarsTemplateEngine());
+//        //post: process new artist form
+//        post("/artists", (req, res) -> { //new
+//            Map<String, Object> model = new HashMap<>();
+//            String artistName = req.queryParams("artistName");
+//            String artistImageUrl = req.queryParams("artistImageUrl");
+//            Artist newArtist = new Artist(artistName, artistImageUrl);
+//            artistDao.add(newArtist);
+//            res.redirect("/artists");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
 
         //post: process update on specific artist
         post("/artists/:id/update", (req, res) -> { //new
@@ -120,9 +120,21 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //post: process new release form
+        //post: process new release form !!!!!!!
         post("/releases", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
+            List<Artist> allArtists = artistDao.getAll();
+            List<String> allArtistNames = new ArrayList<>();
+            for (Artist artist:allArtists) {
+                allArtistNames.add(artist.getName());
+            }
+            String artistName = req.queryParams("artistName");
+            String artistImageUrl = req.queryParams("artistImageUrl");
+            Artist newArtist = new Artist(artistName, artistImageUrl);
+            if (!allArtistNames.contains(newArtist.getName())) {
+                artistDao.add(newArtist);
+            }
+            Artist artist = artistDao.findByName(artistName);
             String title = req.queryParams("title");
             String label = req.queryParams("label");
             String labelNumber = req.queryParams("labelNumber");
@@ -134,12 +146,39 @@ public class App {
             int price = Integer.parseInt(req.queryParams("price"));
             String datePurchased = req.queryParams("datePurchased");
             boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
-            String imageUrl = req.queryParams("imageUrl");
-            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            String releaseImageUrl = req.queryParams("releaseImageUrl");
+            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, releaseImageUrl);
             releaseDao.add(newRelease);
+            Release release = releaseDao.findById(newRelease.getId());
+            artistDao.addArtistToRelease(artist, release);
+            String content = req.queryParams("content");
+            int releaseId = release.getId();
+            Note newNote = new Note(content, releaseId);
+            noteDao.add(newNote);
             res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
+
+//        //post: process new release form
+//        post("/releases", (req, res) -> { //new
+//            Map<String, Object> model = new HashMap<>();
+//            String title = req.queryParams("title");
+//            String label = req.queryParams("label");
+//            String labelNumber = req.queryParams("labelNumber");
+//            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
+//            String sleeveType = req.queryParams("sleeveType");
+//            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
+//            String seller = req.queryParams("seller");
+//            String mediaType = req.queryParams("mediaType");
+//            int price = Integer.parseInt(req.queryParams("price"))*100;
+//            String datePurchased = req.queryParams("datePurchased");
+//            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
+//            String releaseImageUrl = req.queryParams("releaseImageUrl");
+//            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, releaseImageUrl);
+//            releaseDao.add(newRelease);
+//            res.redirect("/releases");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
 
         //post: process update on specific release
         post("/releases/:id/update", (req, res) -> { //new
