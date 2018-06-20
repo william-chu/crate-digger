@@ -51,7 +51,31 @@ public class Sql2oArtistDao implements ArtistDao {
                     .addParameter("artistId", artistId)
                     .executeAndFetch(Integer.class);
             for (Integer releaseId : allReleasesIds) {
-                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId";
+                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = true";
+                releases.add(
+                        con.createQuery(releaseQuery)
+                                .addParameter("releaseId", releaseId)
+                                .executeAndFetchFirst(Release.class));
+            }
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+        return releases;
+    }
+
+    @Override
+    public List<Release> getWishlistByArtistId(int artistId) {
+        ArrayList<Release> releases = new ArrayList<>();
+
+        String joinQuery = "SELECT releaseId FROM artists_releases WHERE artistId = :artistId";
+
+
+        try (Connection con = sql2o.open()) {
+            List<Integer> allReleasesIds = con.createQuery(joinQuery)
+                    .addParameter("artistId", artistId)
+                    .executeAndFetch(Integer.class);
+            for (Integer releaseId : allReleasesIds) {
+                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = false";
                 releases.add(
                         con.createQuery(releaseQuery)
                                 .addParameter("releaseId", releaseId)

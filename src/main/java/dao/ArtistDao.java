@@ -9,6 +9,7 @@ public interface ArtistDao {
     // LIST
     List<Artist> getAll();
     List<Release> getAllReleasesByArtistId(int artistId);
+    List<Release> getWishlistByArtistId(int artistId);
 
     // CREATE
     void add(Artist artist);
