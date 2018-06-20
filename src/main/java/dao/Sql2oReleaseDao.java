@@ -118,7 +118,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getRecent() {
         try(Connection con = sql2o.open()){
-            return  con.createQuery("SELECT * FROM releases ORDER BY id DESC LIMIT 10")
+            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = true ORDER BY id DESC LIMIT 10")
                     .executeAndFetch(Release.class);
         }
     }
