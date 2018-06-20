@@ -23,6 +23,7 @@ public interface ReleaseDao {
 
     //READ
     Release findById(int id);
+    int getTotalValue();
 
 
 

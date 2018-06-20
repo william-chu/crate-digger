@@ -136,4 +136,13 @@ public class Sql2oReleaseDaoTest {
         assertEquals(1, releaseDao.getWishlist().size());
     }
 
+    @Test
+    public void getAllSeventies() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(true);
+        testRelease.setMediaType("78 RPM");
+        releaseDao.add(testRelease);
+        releaseDao.getAllSeventies();
+    }
+
 }
