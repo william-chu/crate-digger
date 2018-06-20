@@ -1,15 +1,16 @@
 {{#partial "content"}}
 {{#if release.isInCollection}}
     <div class="form-group d-flex justify-content-end">
+        <a href="#delete-album"><button class="btn btn-delete" type="button" name="button">Delete</button></a>
         <a href="/releases/{{release.id}}/update"><button class="btn btn-edit" type="button" name="button">Edit</button></a>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 col-xl-4">
             <div class="detail-cover-image"><img src="{{release.imageUrl}}"></div>
             <h1 class="page-title">{{release.title}}</h1>
-            <div class="d-flex justify-content-start align-items-center">
+            <div>
                 {{#each artists}}
-                    <a href="/artists/{{id}}">
+                    <a class="d-flex justify-content-start align-items-center" href="/artists/{{id}}">
                         <div class="artist-thumbnail"><img src="{{imageUrl}}"></div>
                         <h1>{{name}}</h1>
                     </a>
@@ -22,7 +23,7 @@
                     <li>
                         <span class="d-flex justify-content-between align-items-center">
                             {{title}}
-                            <button class="btn btn-delete" type="submit">X</button>
+                            <button class="btn btn-mini-delete" type="submit">X</button>
                         </span>
                     </li>
                 {{/each}}
@@ -55,7 +56,7 @@
                 <p>
                     <span class="d-flex justify-content-between">
                         {{formattedCreatedAt}}: {{content}}
-                        <button class="btn btn-delete" type="submit">X</button>
+                        <button class="btn btn-mini-delete" type="submit">X</button>
                     </span>
                 </p>
             {{/each}}
