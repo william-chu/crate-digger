@@ -4,13 +4,13 @@
     {{#if wishlist}}
         {{#each releasesWithArtists}}
             <div class="album">
-                <a href="/releases/{{this.id}}">
-                    <img src="{{this.imageUrl}}">
+                <a href="/releases/{{@key.id}}">
+                    <img src="{{@key.imageUrl}}">
                     <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                        <h4>{{this.title}}</h4>
-                        {{#each @key}}
-                            <p>{{this.name}}</p>
+                        {{#each this}}
+                            <h4>{{name}}</h4>
                         {{/each}}
+                        <p>{{@key.title}}</p>
                     </div>
                 </a>
             </div>
@@ -18,24 +18,15 @@
     {{else}}
         {{#each releasesWithArtists}}
             <div class="album">
-                <a href="/releases/{{this.id}}">
-                    <img src="{{this.imageUrl}}">
-                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                        <h4>{{this.title}}</h4>
-                        {{#each @key}}
-                            <p>{{this.name}}</p>
-                        {{/each}}
-                    </div>
-                </a>
+                <a href="/releases/{{@key.id}}"><img src="{{@key.imageUrl}}"></a>
+                <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                    {{#each this}}
+                        <h4>{{name}}</h4>
+                    {{/each}}
+                    <p>{{@key.title}}</p>
+                </div>
             </div>
         {{/each}}
-
-        <!--{{#each releasesWithArtists}}-->
-            <!--{{#each @key}}-->
-                <!--<p>{{this.name}}</p>-->
-            <!--{{/each}}-->
-            <!--<p>{{this.title}}</p>-->
-        <!--{{/each}}-->
     {{/if}}
 </div>
 

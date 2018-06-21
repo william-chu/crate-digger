@@ -55,10 +55,10 @@ public class App {
             model.put("total", total);
             List<Release> recentReleases = releaseDao.getRecent();
             model.put("releases", recentReleases);
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : recentReleases) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "index.hbs");
@@ -84,10 +84,10 @@ public class App {
             List<Release> allReleases = releaseDao.getAll();
             model.put("releases", allReleases);
 
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : allReleases) {
                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-               releasesWithArtists.put(releaseArtists, release);
+               releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -112,10 +112,10 @@ public class App {
             model.put("total", total);
             List<Release> wishlist = releaseDao.getWishlist();
             model.put("wishlist", wishlist);
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : wishlist) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");

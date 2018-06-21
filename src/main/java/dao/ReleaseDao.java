@@ -16,6 +16,7 @@ public interface ReleaseDao {
     List<Release> getAllEps();
     List<Release> getAllSingles();
     List<Release> getAllSeventies();
+    List<Release> search(String query);
 
 
     // CREATE
@@ -24,6 +25,7 @@ public interface ReleaseDao {
     //READ
     Release findById(int id);
     int getTotalValue();
+
 
 
 

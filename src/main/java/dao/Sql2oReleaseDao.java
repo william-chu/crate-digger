@@ -197,4 +197,13 @@ public class Sql2oReleaseDao implements ReleaseDao {
         }
 
     }
+
+    @Override
+    public List<Release> search(String query) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM releases WHERE * = :query")
+                    .addParameter("query", true)
+                    .executeAndFetch(Release.class);
+        }
+    }
 }
