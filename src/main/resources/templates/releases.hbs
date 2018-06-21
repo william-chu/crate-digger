@@ -18,13 +18,14 @@
     {{else}}
         {{#each releasesWithArtists}}
             <div class="album">
-                <a href="/releases/{{@key.id}}"><img src="{{@key.imageUrl}}"></a>
-                <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                    {{#each this}}
-                        <h4>{{name}}</h4>
-                    {{/each}}
-                    <p>{{@key.title}}</p>
-                </div>
+                <a href="/releases/{{@key.id}}"><img src="{{@key.imageUrl}}">
+                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                        {{#each this}}
+                            <h4>{{name}}</h4>
+                        {{/each}}
+                        <p>{{@key.title}}</p>
+                    </div>
+                </a>
             </div>
         {{/each}}
     {{/if}}
