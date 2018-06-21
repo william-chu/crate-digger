@@ -150,10 +150,38 @@ a, a:hover {
   border-radius: 5px;
 }
 
+.album {
+ margin: 0 auto 25px;
+ position: relative;
+ width: 100%;
+}
+
+.overlay {
+ visibility: hidden;
+ position: absolute;
+ top: 0;
+ background-color: rgba(0, 0, 0, 0.7);
+ width: 96%;
+ height: 96%;
+ margin: 2%;
+ border-radius: 50%;
+ color: #fff;
+}
+
+.album:hover .overlay {
+ visibility: visible;
+}
+
 /* Details */
 
-.font-normal {
-  font-weight: normal;
+.detail-main-panel {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.detail-main-panel h2 {
+  margin: 10px 0;
 }
 
 .detail-cover-image img{
@@ -188,7 +216,7 @@ a, a:hover {
   margin-bottom: 15px;
 }
 
-.btn-edit, .btn-delete, .btn-mini-delete {
+.btn-edit, .btn-delete, .btn-mini-delete, .btn-collection {
   height: 30px;
   color: #fff;
   font-size: 0.75rem;
@@ -211,6 +239,11 @@ a, a:hover {
   margin-left: 10px;
   padding: 0 5px;
   background-color: #c7002e;
+}
+
+.btn-collection {
+  margin-left: 10px;
+  background-color: #ff6372;
 }
 
 p:hover .btn-mini-delete, li:hover .btn-mini-delete {

@@ -7,7 +7,13 @@
         {{/each}}
     {{else}}
         {{#each releases}}
-            <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
+            <div class="album">
+                <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
+                <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                    <p>Artist Name</p>
+                    <p>{{title}}</p>
+                </div>
+            </div>
         {{/each}}
     {{/if}}
 </div>
