@@ -238,7 +238,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToDelete = Integer.parseInt(req.params("id"));
             releaseDao.deleteById(idOfReleaseToDelete);
-            res.redirect("/artists");
+            res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
 
