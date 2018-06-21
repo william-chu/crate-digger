@@ -20,7 +20,8 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
+                    .addParameter("collectionBoolean", true)
                     .executeAndFetch(Release.class);
         }
     }
@@ -176,7 +177,8 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getWishlist() {
         try(Connection con = sql2o.open()){
-            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = false ")
+            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
+                    .addParameter("collectionBoolean", false)
                     .executeAndFetch(Release.class);
         }
     }
@@ -184,8 +186,11 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public void clearAll() {
         String sql = "DELETE from releases";
+        String deleteJoin = "DELETE from artists_releases";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
+                    .executeUpdate();
+            con.createQuery(deleteJoin)
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);

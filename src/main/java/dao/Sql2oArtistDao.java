@@ -7,6 +7,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Sql2oArtistDao implements ArtistDao {
@@ -51,15 +52,17 @@ public class Sql2oArtistDao implements ArtistDao {
                     .addParameter("artistId", artistId)
                     .executeAndFetch(Integer.class);
             for (Integer releaseId : allReleasesIds) {
-                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = true";
+                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = :booleanCollection";
                 releases.add(
                         con.createQuery(releaseQuery)
                                 .addParameter("releaseId", releaseId)
+                                .addParameter("booleanCollection", true)
                                 .executeAndFetchFirst(Release.class));
             }
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
+        releases.removeAll(Collections.singleton(null));
         return releases;
     }
 
@@ -75,15 +78,17 @@ public class Sql2oArtistDao implements ArtistDao {
                     .addParameter("artistId", artistId)
                     .executeAndFetch(Integer.class);
             for (Integer releaseId : allReleasesIds) {
-                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = false";
+                String releaseQuery = "SELECT * FROM releases WHERE id = :releaseId AND isInCollection = :booleanCollection";
                 releases.add(
                         con.createQuery(releaseQuery)
                                 .addParameter("releaseId", releaseId)
+                                .addParameter("booleanCollection", false)
                                 .executeAndFetchFirst(Release.class));
             }
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
+        releases.removeAll(Collections.singleton(null));
         return releases;
     }
 
@@ -154,8 +159,11 @@ public class Sql2oArtistDao implements ArtistDao {
     @Override
     public void clearAll() {
         String sql = "DELETE from artists";
+        String deleteJoin = "DELETE from artists_releases";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
+                    .executeUpdate();
+            con.createQuery(deleteJoin)
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);

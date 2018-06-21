@@ -25,13 +25,19 @@
         <h4>In Collection</h4>
         <div class="collection-grid">
             {{#each releases}}
-                <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
+                <!--{{#if this = null}}-->
+                    <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
+                <!--{{else}}-->
+                <!--{{/if}}-->
             {{/each}}
         </div>
         <h4>Wishlist</h4>
         <div class="collection-grid">
             {{#each wishlist}}
-                <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
+                <!--{{#if this = null}}-->
+                    <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
+                <!--{{else}}-->
+                <!--{{/if}}-->
             {{/each}}
         </div>
     </div>

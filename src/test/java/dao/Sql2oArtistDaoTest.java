@@ -112,5 +112,31 @@ public class Sql2oArtistDaoTest {
         assertEquals(1, artistDao.getAll().size());
     }
 
+    @Test
+    public void addArtistToRelease2(){
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        artistDao.addArtistToRelease(testArtist, testRelease);
+        assertEquals(1, releaseDao.getAllArtistsByReleaseId(testRelease.getId()).size());
+    }
+
+
+
+    @Test
+    public void getAllReleasesByArtistId(){
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        Release testRelease2 = setupNewRelease();
+        testRelease2.setInCollection(false);
+        releaseDao.add(testRelease2);
+        artistDao.addArtistToRelease(testArtist, testRelease);
+        artistDao.addArtistToRelease(testArtist, testRelease2);
+        assertEquals(1, artistDao.getAllReleasesByArtistId(testArtist.getId()).size());
+    }
+
 
 }
