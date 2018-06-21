@@ -7,6 +7,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Sql2oReleaseDao implements ReleaseDao {
@@ -20,9 +21,11 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
+            List<Release> allReleasesWithoutNull = con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
                     .addParameter("collectionBoolean", true)
                     .executeAndFetch(Release.class);
+            allReleasesWithoutNull.removeAll(Collections.singleton(null));
+            return allReleasesWithoutNull;
         }
     }
 
