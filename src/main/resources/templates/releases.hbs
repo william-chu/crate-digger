@@ -3,16 +3,26 @@
 <div class="collection-grid">
     {{#if wishlist}}
         {{#each wishlist}}
-            <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
+            <div class="album">
+                <a href="/releases/{{id}}">
+                    <img src="{{imageUrl}}">
+                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                        <h4>{{title}}</h4>
+                        <p>by Artist Name</p>
+                    </div>
+                </a>
+            </div>
         {{/each}}
     {{else}}
         {{#each releases}}
             <div class="album">
-                <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
-                <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                    <p>Artist Name</p>
-                    <p>{{title}}</p>
-                </div>
+                <a href="/releases/{{id}}">
+                    <img src="{{imageUrl}}">
+                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                        <h4>{{title}}</h4>
+                        <p>by Artist Name</p>
+                    </div>
+                </a>
             </div>
         {{/each}}
     {{/if}}

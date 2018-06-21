@@ -2,7 +2,15 @@
 
 <div class="collection-grid">
     {{#each releases}}
-        <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
+        <div class="album">
+            <a href="/releases/{{id}}">
+                <img src="{{imageUrl}}">
+                <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                    <h4>{{title}}</h4>
+                    <p>by Artist Name</p>
+                </div>
+            </a>
+        </div>
     {{/each}}
 </div>
 
