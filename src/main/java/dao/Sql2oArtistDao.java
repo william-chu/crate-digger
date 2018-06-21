@@ -35,7 +35,7 @@ public class Sql2oArtistDao implements ArtistDao {
     @Override
     public List<Artist> getAll() {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM artists")
+            return con.createQuery("SELECT * FROM artists ORDER BY name ASC")
                     .executeAndFetch(Artist.class);
         }
     }

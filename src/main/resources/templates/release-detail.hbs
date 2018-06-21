@@ -50,7 +50,7 @@
             <h4>Purchase</h4>
             <h6>Date: {{release.datePurchased}}</h6>
             <h6>Seller: {{release.seller}}</h6>
-            <h6>Price: ${{release.price}}</h6>
+            <h6>Price: ${{dollarPrice}}</h6>
             <h4>Notes</h4>
             {{#each notes}}
                 <p>
@@ -78,7 +78,7 @@
     <div class="d-flex justify-content-end">
         <a href="/releases/{{release.id}}/delete"><button class="btn btn-delete" type="button" name="button">Delete</button></a>
         <a href="/releases/{{release.id}}/update"><button class="btn btn-edit" type="button" name="button">Edit</button></a>
-        <a href="#add-to-collection"><button class="btn btn-collection" type="button" name="button">Add to Crate</button></a>
+        <a href="/releases/{{release.id}}/to-collection"><button class="btn btn-collection" type="button" name="button">Add to Crate</button></a>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 col-xl-4 detail-main-panel">
