@@ -1,9 +1,6 @@
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 import dao.Sql2oReleaseDao;
@@ -80,6 +77,13 @@ public class App {
             model.put("total", total);
             List<Release> allReleases = releaseDao.getAll();
             model.put("releases", allReleases);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : allReleases) {
+               List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+               releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 

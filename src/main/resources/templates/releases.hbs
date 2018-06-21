@@ -6,15 +6,24 @@
             <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
         {{/each}}
     {{else}}
-        {{#each releases}}
+        {{#each releasesWithArtists}}
             <div class="album">
-                <a href="/releases/{{id}}"><img src="{{imageUrl}}"></a>
+                <a href="/releases/{{this.id}}"><img src="{{this.imageUrl}}"></a>
                 <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                    <p>Artist Name</p>
-                    <p>{{title}}</p>
+                    {{#each @key}}
+                        <p>{{this.name}}</p>
+                    {{/each}}
+                    <p>{{this.title}}</p>
                 </div>
             </div>
         {{/each}}
+
+        <!--{{#each releasesWithArtists}}-->
+            <!--{{#each @key}}-->
+                <!--<p>{{this.name}}</p>-->
+            <!--{{/each}}-->
+            <!--<p>{{this.title}}</p>-->
+        <!--{{/each}}-->
     {{/if}}
 </div>
 
