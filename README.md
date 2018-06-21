@@ -9,6 +9,8 @@
 
 This application will allow users to add and update records to a personal collection.
 
+For Sketch wireframe and prototype design see https://github.com/m-chu/crate-digger-design
+
 #### User Story
 
 A. As a user, I want to see all records in my collection<br>
@@ -42,15 +44,14 @@ For support, contact: matt.f.miller@live.com, theofficialmatt@gmail.com, william
 
 ## Technologies Used
 
-* Java
-* Spark
-* SQL Database
-* H2
-* Handlebars
 * CSS
+* Java
+* PostgreSQL
+* Spark
+* Handlebars
 
 ### License
 
 This software is licensed under the GPL license.
 
-Copyright © 2018 **Matt Miller**
+Copyright © 2018 **Matt Miller, Matt Dowdney, Mike Chu, William Chu**
