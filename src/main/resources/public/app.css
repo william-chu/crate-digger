@@ -147,29 +147,37 @@ a, a:hover {
 
 .collection-grid img {
   width: 100%;
-  border-radius: 5px;
 }
 
-.album {
- margin: 0 auto 25px;
- position: relative;
- width: 100%;
+.collection-grid .album, .collection-grid .artist {
+  margin: 0 auto 25px;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 10px 20px -5px #3339;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .overlay {
- visibility: hidden;
- position: absolute;
- top: 0;
- background-color: rgba(0, 0, 0, 0.7);
- width: 96%;
- height: 96%;
- margin: 2%;
- border-radius: 50%;
- color: #fff;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  color: #fff;
 }
 
-.album:hover .overlay {
- visibility: visible;
+.album .overlay {
+  width: 96%;
+  height: 96%;
+  margin: 2%;
+  border-radius: 50%;
+}
+
+.album:hover .overlay, .artist:hover .overlay {
+  visibility: visible;
 }
 
 /* Details */
@@ -272,6 +280,12 @@ p:hover .btn-mini-delete, li:hover .btn-mini-delete {
 
 /* Release Form */
 
+.form-container {
+  min-width: 500px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 label {
   font-weight: bold;
 }
@@ -280,10 +294,6 @@ form button {
   margin: 0 10px;
   color: #fff;
   text-transform: uppercase;
-}
-
-.container {
-  padding-top: 50px;
 }
 
 .form-group, .input-group{
@@ -298,18 +308,14 @@ form button {
   width: 48%;
 }
 
+.date-input {
+  height: 38px;
+}
+
 .btn-cancel {
   background-color: #e46b59;
 }
 
 .btn-submit {
   background-color: #88b9b8;
-}
-
-.preview-image {
-  height: 270px;
-  width: 270px;
-  margin: 20px auto;
-  border-radius: 10px;
-  background-color: lightgray;
 }

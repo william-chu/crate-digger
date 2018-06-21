@@ -4,7 +4,14 @@
 
 <div class="collection-grid">
     {{#each artists}}
-            <a href="/artists/{{id}}"><img src="{{imageUrl}}"></a>
+        <div class="artist">
+            <a href="/artists/{{id}}">
+                <img src="{{imageUrl}}">
+                <div class="overlay d-flex justify-content-center align-items-center">
+                    <h4>{{name}}</h4>
+                </div>
+            </a>
+        </div>
     {{/each}}
 </div>
 

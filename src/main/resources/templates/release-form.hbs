@@ -1,7 +1,7 @@
 {{#partial "content"}}
 
     {{#if editArtist}}
-        <form action="/artists/{{editArtist.id}}/update" method="post">
+        <form class="form-container" action="/artists/{{editArtist.id}}/update" method="post">
             <h2>Artist</h2>
             <div class="form-group">
                 <label>Artist Name</label>
@@ -18,16 +18,16 @@
         </form>
 
         {{else if editRelease}}
-        <form action="/releases/{{editRelease.id}}/update" method="post">
+        <form class="form-container" action="/releases/{{editRelease.id}}/update" method="post">
             <h2>Album</h2>
             <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="isInCollection" value="true" checked>
-                    <label class="form-check-label" for="inlineRadio1">Collection</label>
+                <div class="form-check">
+                    <input type="radio" name="isInCollection" value="true" checked>
+                    <label>Collection</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="isInCollection" value="false">
-                    <label class="form-check-label" for="inlineRadio2">Wishlist</label>
+                <div class="form-check">
+                    <input type="radio" name="isInCollection" value="false">
+                    <label>Wishlist</label>
                 </div>
             </div>
             <div class="form-group">
@@ -51,8 +51,8 @@
             <div class="d-flex justify-content-between indent">
                 <div class="form-group">
                     <label>Media Type</label>
-                    <select class="custom-select" name="mediaType" required>
-                        <option selected>Choose...</option>
+                    <select class="custom-select form-control" name="mediaType" required>
+                        <option selected></option>
                         <option value="Single">Single</option>
                         <option value='12" Single'>12" Single</option>
                         <option value='LP'>LP</option>
@@ -64,23 +64,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Media Condition</label>
-                    <select class="custom-select" name="mediaCondition">
-                        <option selected value="0">Choose...</option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
                     <label>Sleeve Type</label>
-                    <select class="custom-select" name="sleeveType" required>
-                        <option selected>Choose...</option>
+                    <select class="custom-select form-control" name="sleeveType" required>
+                        <option selected></option>
                         <option value="Picture Sleeve">Picture Sleeve</option>
                         <option value="Company Sleeve">Company Sleeve</option>
                         <option value="Brown Sleeve">Brown Sleeve</option>
@@ -89,10 +75,24 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
+            </div>
+            <div class="d-flex justify-content-between indent">
+                <div class="form-group">
+                    <label>Media Condition</label>
+                    <select class="custom-select form-control" name="mediaCondition">
+                        <option selected value="0"></option>
+                        <option value="6">Near Mint</option>
+                        <option value="5">Very Good Plus</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Very Good Minus</option>
+                        <option value="2">Good</option>
+                        <option value="1">Poor</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Sleeve Condition</label>
-                    <select class="custom-select" name="sleeveCondition">
-                        <option selected value="0">Choose...</option>
+                    <select class="custom-select form-control" name="sleeveCondition">
+                        <option selected value="0"></option>
                         <option value="6">Near Mint</option>
                         <option value="5">Very Good Plus</option>
                         <option value="4">Very Good</option>
@@ -105,7 +105,7 @@
             <div class="d-flex justify-content-around">
                 <div class="form-group">
                     <label>Purchase Date</label>
-                    <input class="form-control" type="date" name="datePurchased" value="{{editRelease.datePurchased}}">
+                    <input class="form-control date-input" type="date" name="datePurchased" value="{{editRelease.datePurchased}}">
                 </div>
                 <div class="form-group">
                     <label>Price</label>
@@ -224,7 +224,7 @@
         </form>
     {{else}}
         <h1 class="page-title">Add/Edit Album</h1>
-        <form action="/releases" method="post">
+        <form class="form-container" action="/releases" method="post">
             <h2>Artist</h2>
             <div class="form-group">
                 <label>Artist Name</label>
@@ -242,13 +242,13 @@
             <!-- INNER FORM 1 - RELEASE SECTION -->
             <h2>Album</h2>
             <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="isInCollection" value="true" checked>
-                    <label class="form-check-label" for="inlineRadio1">Collection</label>
+                <div class="form-check">
+                    <input type="radio" name="isInCollection" value="true" checked>
+                    <label for="inlineRadio1">Collection</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="isInCollection" value="false">
-                    <label class="form-check-label" for="inlineRadio2">Wishlist</label>
+                <div class="form-check">
+                    <input type="radio" name="isInCollection" value="false">
+                    <label for="inlineRadio2">Wishlist</label>
                 </div>
             </div>
             <div class="form-group">
@@ -272,8 +272,8 @@
             <div class="d-flex justify-content-between indent">
                 <div class="form-group">
                     <label>Media Type</label>
-                    <select class="custom-select" name="mediaType" required>
-                        <option selected>Choose...</option>
+                    <select class="custom-select form-control" name="mediaType" required>
+                        <option selected></option>
                         <option value="Single">Single</option>
                         <option value='12" Single'>12" Single</option>
                         <option value='LP'>LP</option>
@@ -285,23 +285,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Media Condition</label>
-                    <select class="custom-select" name="mediaCondition">
-                        <option selected value="0">Choose...</option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
                     <label>Sleeve Type</label>
-                    <select class="custom-select" name="sleeveType" required>
-                        <option selected>Choose...</option>
+                    <select class="custom-select form-control" name="sleeveType" required>
+                        <option selected></option>
                         <option value="Picture Sleeve">Picture Sleeve</option>
                         <option value="Company Sleeve">Company Sleeve</option>
                         <option value="Brown Sleeve">Brown Sleeve</option>
@@ -310,10 +296,24 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
+            </div>
+            <div class="d-flex justify-content-between indent">
+                <div class="form-group">
+                    <label>Media Condition</label>
+                    <select class="custom-select form-control" name="mediaCondition">
+                        <option selected value="0"></option>
+                        <option value="6">Near Mint</option>
+                        <option value="5">Very Good Plus</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Very Good Minus</option>
+                        <option value="2">Good</option>
+                        <option value="1">Poor</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Sleeve Condition</label>
-                    <select class="custom-select" name="sleeveCondition">
-                        <option selected value="0">Choose...</option>
+                    <select class="custom-select form-control" name="sleeveCondition">
+                        <option selected value="0"></option>
                         <option value="6">Near Mint</option>
                         <option value="5">Very Good Plus</option>
                         <option value="4">Very Good</option>
@@ -326,7 +326,7 @@
             <div class="d-flex justify-content-around">
                 <div class="form-group">
                     <label>Purchase Date</label>
-                    <input class="form-control" type="date" name="datePurchased">
+                    <input class="form-control date-input" type="date" name="datePurchased">
                 </div>
                 <div class="form-group">
                     <label>Price</label>
