@@ -47,6 +47,7 @@ button {
   left: 0;
   border-right: 10px solid #88b9b8;
   background: linear-gradient(to top, #d5efef, #76a9a8);
+  overflow: hidden;
 }
 
 .logo {
@@ -103,6 +104,14 @@ button {
   border-radius: 100%;
 }
 
+#display-record {
+  width: 830px;
+  position: absolute;
+  left: -270px;
+  bottom: -500px;
+  z-index: -10;
+}
+
 /* UI Dashboard - Navbar */
 
 .navbar {
@@ -157,8 +166,12 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 25px;
-  margin: 25px auto;
   width: 100%;
+  margin: 0 auto 25px;
+}
+
+.collection-grid p {
+  margin: 0;
 }
 
 @media screen and (min-width: 1200px) {
@@ -178,7 +191,6 @@ button {
 }
 
 .collection-grid .album, .collection-grid .artist {
-  margin: 0 auto 25px;
   position: relative;
   width: 100%;
   box-shadow: 0 10px 20px -5px #3339;
