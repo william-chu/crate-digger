@@ -7,7 +7,7 @@
         <a href="/artists/{{artist.id}}/update"><button class="btn btn-edit" type="button" name="button">Edit</button></a>
     </div>
 <div class="row">
-    <div class="col-12 col-lg-6 col-xl-4">
+    <div class="col-12 col-lg-6 col-xl-4 detail-main-panel">
         <div class="detail-cover-image"><img src="{{artist.imageUrl}}"></div>
         <h1 class="page-title">{{artist.name}}</h1>
         <p><strong>Biography</strong>: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -22,7 +22,7 @@
     </div>
     <!-- 2ND COLUMN -->
     <div class="col-12 col-lg-6 col-xl-8">
-        <h1>In Collection</h1>
+        <h4>In Collection</h4>
         <div class="collection-grid">
             {{#each releases}}
                 <!--{{#if this = null}}-->
@@ -31,8 +31,8 @@
                 <!--{{/if}}-->
             {{/each}}
         </div>
-        <h1>Wishlist</h1>
-        <div class="d-flex justify-content-start">
+        <h4>Wishlist</h4>
+        <div class="collection-grid">
             {{#each wishlist}}
                 <!--{{#if this = null}}-->
                     <div class="album-thumbnail"><a href="/releases/{{id}}"><img src="{{imageUrl}}"></a></div>
