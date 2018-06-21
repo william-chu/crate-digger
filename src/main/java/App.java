@@ -63,6 +63,20 @@ public class App {
         //get: show releases in collection
         get("/releases", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             List<Release> allReleases = releaseDao.getAll();
             model.put("releases", allReleases);
             return new ModelAndView(model, "releases.hbs");
@@ -71,6 +85,20 @@ public class App {
         //get: show releases in wishlist
         get("/releases/wishlist", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             List<Release> wishlist = releaseDao.getWishlist();
             model.put("wishlist", wishlist);
             return new ModelAndView(model, "releases.hbs");
@@ -79,6 +107,20 @@ public class App {
         //get: show all artists
         get("/artists", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             List<Artist> allArtists = artistDao.getAll();
             model.put("artists", allArtists);
             return new ModelAndView(model, "artists.hbs");
@@ -87,6 +129,20 @@ public class App {
         //get: show details and releases of single artist
         get("/artists/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             int idOfArtistToFind = Integer.parseInt(req.params("id"));
             Artist artist = artistDao.findById(idOfArtistToFind);
             List<Release> releases = artistDao.getAllReleasesByArtistId(idOfArtistToFind);
@@ -105,6 +161,20 @@ public class App {
         //get:show new artist/release form
         get("/releases/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             List<Artist> allArtists = artistDao.getAll();
             model.put("artists", allArtists);
             return new ModelAndView(model, "release-form.hbs");
@@ -113,6 +183,20 @@ public class App {
         //get: show details of specific release
         get("/releases/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             int idOfReleaseToFind = Integer.parseInt(req.params("id"));
             Release release = releaseDao.findById(idOfReleaseToFind);
             List<Artist> artists = releaseDao.getAllArtistsByReleaseId(idOfReleaseToFind);
@@ -132,6 +216,20 @@ public class App {
         //get: update form for specific artist
         get("/artists/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             int idOfArtistToUpdate = Integer.parseInt(req.params("id"));
             Artist editArtist = artistDao.findById(idOfArtistToUpdate);
             model.put("editArtist", editArtist);
@@ -196,6 +294,20 @@ public class App {
         //get: update form for specific release
         get("/releases/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            int total = releaseDao.getTotalValue();
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
             int idOfReleaseToUpdate = Integer.parseInt(req.params("id"));
             Release editRelease = releaseDao.findById(idOfReleaseToUpdate);
             model.put("editRelease", editRelease);
