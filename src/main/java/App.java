@@ -55,6 +55,12 @@ public class App {
             model.put("total", total);
             List<Release> recentReleases = releaseDao.getRecent();
             model.put("releases", recentReleases);
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : recentReleases) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -106,6 +112,12 @@ public class App {
             model.put("total", total);
             List<Release> wishlist = releaseDao.getWishlist();
             model.put("wishlist", wishlist);
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 
