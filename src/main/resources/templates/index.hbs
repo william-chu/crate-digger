@@ -1,13 +1,15 @@
 {{#partial "content"}}
 
 <div class="collection-grid">
-    {{#each releases}}
+    {{#each releasesWithArtists}}
         <div class="album">
-            <a href="/releases/{{id}}">
-                <img src="{{imageUrl}}">
+            <a href="/releases/{{this.id}}">
+                <img src="{{this.imageUrl}}">
                 <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                    <h4>{{title}}</h4>
-                    <p>by Artist Name</p>
+                    <h4>{{this.title}}</h4>
+                    {{#each @key}}
+                        <p>{{this.name}}</p>
+                    {{/each}}
                 </div>
             </a>
         </div>

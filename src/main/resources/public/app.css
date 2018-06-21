@@ -26,6 +26,10 @@ a, a:hover {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* UI Dashboard */
 
 #ui-dashboard {
