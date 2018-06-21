@@ -83,12 +83,12 @@ public class App {
             model.put("total", total);
             String query = req.queryParams("query");
             List<Release> allReleases;
-            if(query != null) {
+//            if(query != null) {
+//                allReleases = releaseDao.getAll();
+//                allReleases = releaseDao.search(query);
+//            } else {
                 allReleases = releaseDao.getAll();
-                allReleases = releaseDao.search(query);
-            } else {
-                allReleases = releaseDao.getAll();
-            }
+//            }
             model.put("releases", allReleases);
 
             Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
