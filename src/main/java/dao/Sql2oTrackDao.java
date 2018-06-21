@@ -38,6 +38,15 @@ public class Sql2oTrackDao implements TrackDao {
     }
 
     @Override
+    public Track findById(int id) {
+        try(Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * from tracks WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Track.class);
+        }
+    }
+
+    @Override
     public void update(int id, String title) {
         String sql = "UPDATE tracks SET title = :title WHERE id = :id";
         try (Connection con = sql2o.open()) {

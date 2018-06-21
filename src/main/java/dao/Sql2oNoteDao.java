@@ -42,7 +42,6 @@ public class Sql2oNoteDao implements NoteDao {
 
     @Override
     public Note findById(int id) {
-//        String sql = "SELECT * from notes WHERE id = :id";
         try(Connection con = sql2o.open()) {
             return con.createQuery("SELECT * from notes WHERE id = :id")
                     .addParameter("id", id)

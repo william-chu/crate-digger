@@ -7,6 +7,7 @@ import java.util.List;
 public interface TrackDao {
     // LIST
     List<Track> getAllByReleaseId(int id);
+    Track findById(int id);
 
     // CREATE
     void add(Track track);
