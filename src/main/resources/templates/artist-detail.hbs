@@ -1,6 +1,9 @@
 {{#partial "content"}}
 
     <div class="d-flex justify-content-end">
+        {{#if hasReleases}}
+            <a href="/artists/{{artist.id}}/delete"><button class="btn btn-delete" type="button" name="button">Delete</button></a>
+        {{/if}}
         <a href="/artists/{{artist.id}}/update"><button class="btn btn-edit" type="button" name="button">Edit</button></a>
     </div>
 <div class="row">

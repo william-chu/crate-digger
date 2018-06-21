@@ -94,6 +94,11 @@ public class App {
             model.put("artist", artist);
             model.put("releases", releases);
             model.put("wishlist", wishlist);
+            String hasReleases = "";
+            if (releases.size() == 0 && wishlist.size() == 0){
+                hasReleases = "Hell Yeah!";
+            }
+            model.put("hasReleases", hasReleases);
             return new ModelAndView(model, "artist-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -219,8 +224,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        // post:delete specific artist
-        post("/artists/:id/delete", (req, res) -> {
+        // get:delete specific artist
+        get("/artists/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToDelete = Integer.parseInt(req.params("id"));
             artistDao.deleteById(idOfArtistToDelete);
@@ -228,8 +233,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //post: delete specific release
-        post("/releases/:id/delete", (req, res) -> {
+        //get: delete specific release
+        get("/releases/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToDelete = Integer.parseInt(req.params("id"));
             releaseDao.deleteById(idOfReleaseToDelete);
@@ -248,8 +253,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //post: delete specific note
-        post("/note/:id", (req, res) -> {
+        //get: delete specific note
+        get("/notes/:id/delete", (req, res) -> {
             int idOfNoteToDelete = Integer.parseInt(req.params("id"));
             Note noteToDelete = noteDao.findById(idOfNoteToDelete);
             int releaseId = noteToDelete.getReleaseId();
@@ -264,6 +269,16 @@ public class App {
             int releaseId = Integer.parseInt(req.params("id"));
             Track newTrack = new Track(title, releaseId);
             trackDao.add(newTrack);
+            res.redirect("/releases/" + releaseId);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete specific track
+        get("/tracks/:id/delete", (req, res) -> {
+            int idOfTrackToDelete = Integer.parseInt(req.params("id"));
+            Track trackToDelete = trackDao.findById(idOfTrackToDelete);
+            int releaseId = trackToDelete.getReleaseId();
+            trackDao.deleteById(idOfTrackToDelete);
             res.redirect("/releases/" + releaseId);
             return null;
         }, new HandlebarsTemplateEngine());
