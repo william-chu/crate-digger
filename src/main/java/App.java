@@ -1,4 +1,5 @@
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -69,7 +70,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -91,7 +92,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -113,7 +114,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -135,7 +136,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -167,7 +168,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -189,7 +190,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -210,6 +211,8 @@ public class App {
             model.put("tracks", tracks);
             model.put("sleeveCondition", sleeveCondition);
             model.put("mediaCondition", mediaCondition);
+            BigDecimal payment = new BigDecimal(release.getPrice()).movePointLeft(2);
+            model.put("dollarPrice", payment);
             return new ModelAndView(model, "release-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -222,7 +225,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -273,7 +276,7 @@ public class App {
             int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
             String seller = req.queryParams("seller");
             String mediaType = req.queryParams("mediaType");
-            int price = Integer.parseInt(req.queryParams("price"));
+            int price = (int)(Double.parseDouble(req.queryParams("price"))*100);
             String datePurchased = req.queryParams("datePurchased");
             boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
             String releaseImageUrl = req.queryParams("releaseImageUrl");
@@ -300,7 +303,7 @@ public class App {
             int seventiesSize = releaseDao.getAllSeventies().size();
             int epsSize = releaseDao.getAllEps().size();
             int lpsSize = releaseDao.getAllLps().size();
-            int total = releaseDao.getTotalValue();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
@@ -316,6 +319,51 @@ public class App {
 
         //post: process update on specific release
         post("/releases/:id/update", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            int idOfReleaseToFind = Integer.parseInt(req.params("id"));
+            String title = req.queryParams("title");
+            String label = req.queryParams("label");
+            String labelNumber = req.queryParams("labelNumber");
+            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
+            String sleeveType = req.queryParams("sleeveType");
+            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
+            String seller = req.queryParams("seller");
+            String mediaType = req.queryParams("mediaType");
+            int price = Integer.parseInt(req.queryParams("price"));
+            String datePurchased = req.queryParams("datePurchased");
+            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
+            String imageUrl = req.queryParams("releaseImageUrl");
+            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            releaseDao.update(idOfReleaseToFind, title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, imageUrl);
+            res.redirect("/releases/" + idOfReleaseToFind);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: get to-collection form
+        get("/releases/:id/to-collection", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles().size();
+            int seventiesSize = releaseDao.getAllSeventies().size();
+            int epsSize = releaseDao.getAllEps().size();
+            int lpsSize = releaseDao.getAllLps().size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            int idOfReleaseToAdd = Integer.parseInt(req.params("id"));
+            Release addRelease = releaseDao.findById(idOfReleaseToAdd);
+            model.put("addRelease", addRelease);
+            return new ModelAndView(model, "release-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post: process update on specific release
+        post("/releases/:id/to-collection", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             int idOfReleaseToFind = Integer.parseInt(req.params("id"));
             String title = req.queryParams("title");
