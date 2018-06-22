@@ -152,13 +152,20 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> allReleases = releaseDao.getAllEps(true);
+            String query = req.queryParams("query");
+            List<Release> allReleases;
+//            if(query != null) {
+//                allReleases = releaseDao.getAll();
+//                allReleases = releaseDao.search(query);
+//            } else {
+            allReleases = releaseDao.getAllEps(true);
+//            }
             model.put("releases", allReleases);
 
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : allReleases) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -181,13 +188,20 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> allReleases = releaseDao.getAllLps(true);
+            String query = req.queryParams("query");
+            List<Release> allReleases;
+//            if(query != null) {
+//                allReleases = releaseDao.getAll();
+//                allReleases = releaseDao.search(query);
+//            } else {
+            allReleases = releaseDao.getAllLps(true);
+//            }
             model.put("releases", allReleases);
 
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : allReleases) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -210,13 +224,20 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> allReleases = releaseDao.getAllSeventies(true);
+            String query = req.queryParams("query");
+            List<Release> allReleases;
+//            if(query != null) {
+//                allReleases = releaseDao.getAll();
+//                allReleases = releaseDao.search(query);
+//            } else {
+            allReleases = releaseDao.getAllSeventies(true);
+//            }
             model.put("releases", allReleases);
 
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
             for (Release release : allReleases) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -267,13 +288,12 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> wishlistSingles = releaseDao.getAllSingles(false);
-            model.put("wishlist", wishlistSingles);
-
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
-            for (Release release : wishlistSingles) {
+            List<Release> wishlist = releaseDao.getAllSingles(false);
+            model.put("wishlist", wishlist);
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -296,13 +316,12 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> wishlistEps = releaseDao.getAllEps(false);
-            model.put("wishlist", wishlistEps);
-
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
-            for (Release release : wishlistEps) {
+            List<Release> wishlist = releaseDao.getAllEps(false);
+            model.put("wishlist", wishlist);
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -325,13 +344,12 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> wishlistLps = releaseDao.getAllLps(false);
-            model.put("wishlist", wishlistLps);
-
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
-            for (Release release : wishlistLps) {
+            List<Release> wishlist = releaseDao.getAllLps(false);
+            model.put("wishlist", wishlist);
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
@@ -354,13 +372,12 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Release> wishlist78s = releaseDao.getAllSeventies(false);
-            model.put("wishlist", wishlist78s);
-
-            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
-            for (Release release : wishlist78s) {
+            List<Release> wishlist = releaseDao.getAllSeventies(false);
+            model.put("wishlist", wishlist);
+            Map<Release, List<Artist>> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist) {
                 List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
-                releasesWithArtists.put(releaseArtists, release);
+                releasesWithArtists.put(release, releaseArtists);
             }
             model.put("releasesWithArtists", releasesWithArtists);
             return new ModelAndView(model, "releases.hbs");
