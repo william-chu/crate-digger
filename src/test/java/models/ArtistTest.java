@@ -21,14 +21,12 @@ public class ArtistTest {
         assertEquals(1, testArtist.getId());
     }
 
-
     @Test
     public void setName() {
         Artist testArtist = new Artist("Rolling Stones", "www.test.url");
         testArtist.setName("Beck");
         assertEquals("Beck", testArtist.getName());
     }
-
 
     @Test
     public void setImageUrl() {

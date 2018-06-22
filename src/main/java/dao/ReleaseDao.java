@@ -7,7 +7,12 @@ import models.Release;
 import java.util.List;
 
 public interface ReleaseDao {
-    // LIST
+    // CREATE
+    void add(Release release);
+
+    //READ
+    Release findById(int id);
+    int getTotalValue();
     List<Release> getAll();
     List<Release> getRecent();
     List<Release> getWishlist();
@@ -16,15 +21,7 @@ public interface ReleaseDao {
     List<Release> getAllEps(boolean isInCollection);
     List<Release> getAllSingles(boolean isInCollection);
     List<Release> getAllSeventies(boolean isInCollection);
-
-
-
-    // CREATE
-    void add(Release release);
-
-    //READ
-    Release findById(int id);
-    int getTotalValue();
+//    List<Release> search(String query);
 
 
 

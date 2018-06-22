@@ -2,6 +2,7 @@
 
 html, body {
   height: 100%;
+  min-width: 860px;
   font-size: 100%;
 }
 
@@ -33,20 +34,20 @@ button {
 /* UI Dashboard */
 
 #ui-dashboard {
-  min-height: 100%;
-  display: grid;
-  grid-template-columns: 300px auto;
+  height: 100%;
 }
 
 /* UI Dashboard - Sidebar */
 
 .sidebar {
-  min-height: 100%;
+  height: 100%;
   width: 300px;
-  position: relative;
-  padding-bottom: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
   border-right: 10px solid #88b9b8;
-  background: linear-gradient(to bottom, #a8c5c5 20%, #1f5857);
+  background: linear-gradient(to top, #d5efef, #76a9a8);
+  overflow: hidden;
 }
 
 .logo {
@@ -61,12 +62,17 @@ button {
 }
 
 .user-profile {
-  margin: 25px 0;
+  margin: 50px 30px;
+  border-top-left-radius: 115px;
+  border-top-right-radius: 115px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #fff9;
   text-align: center;
 }
 
-.user-profile img {
-  width: 200px;
+.profile-img {
+  width: 230px;
   display: block;
   margin: 25px auto;
   border-radius: 100%;
@@ -83,8 +89,6 @@ button {
 
 .crate-mates {
   width: 100%;
-  position: absolute;
-  bottom: 0;
   padding-top: 20px;
 }
 
@@ -92,7 +96,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-  padding: 10px 50px 50px;
+  padding: 10px 30px 30px;
 }
 
 .crate-mates-images img {
@@ -100,11 +104,25 @@ button {
   border-radius: 100%;
 }
 
+#display-record {
+  width: 830px;
+  position: absolute;
+  left: -270px;
+  bottom: -500px;
+  z-index: -10;
+}
+
 /* UI Dashboard - Navbar */
 
 .navbar {
+  min-width: 860px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   margin: 20px 0 50px;
-  padding: 0;
+  padding: 0 20px 0 320px;
+  z-index: 10;
 }
 
 .navbar a {
@@ -115,6 +133,11 @@ button {
   text-transform: uppercase;
 }
 
+.button-primary {
+  background-color: #ff6372;
+  color: #fff;
+}
+
 .button-blue {
   background-color: #88b9b8;
   color: #fff;
@@ -122,10 +145,11 @@ button {
 
 .button-hollow {
   border: 1px solid #88b9b8;
+  background-color: #fff;
   color: #88b9b8;
 }
 
-.button-blue:hover {
+.button-blue:hover, .button-primary:hover  {
   color: #fff;
 }
 
@@ -136,17 +160,62 @@ button {
 /* Main Content */
 
 .main {
-  padding: 0 50px 50px;
+  min-height: 100%;
+  padding: 70px 50px 50px;
+  margin-left: 300px;
 }
 
 /* Collection Grid */
 
+#search-filters {
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search-artists {
+  width: 100%
+}
+
+#search-filters button {
+  margin: 0 3px;
+}
+
+#search-filters .btn-submit, #search-artists .btn-submit {
+  margin: 0 0 0 10px;
+}
+
+@media screen and (min-width: 1200px) {
+  #search-filters {
+    flex-direction: row;
+  }
+
+  #search-artists {
+    width: auto;
+  }
+}
+
 .collection-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 25px;
-  margin: 25px auto;
-  width: 90%;
+  width: 100%;
+  margin: 0 auto 25px;
+}
+
+.collection-grid p {
+  margin: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .collection-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .collection-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .collection-grid img {
@@ -154,7 +223,6 @@ button {
 }
 
 .collection-grid .album, .collection-grid .artist {
-  margin: 0 auto 25px;
   position: relative;
   width: 100%;
   box-shadow: 0 10px 20px -5px #3339;
@@ -171,6 +239,7 @@ button {
   height: 100%;
   border-radius: 5px;
   color: #fff;
+  text-align: center;
 }
 
 .album .overlay {

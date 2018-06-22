@@ -51,6 +51,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
                     .executeAndFetch(Release.class);
         }
     }
+
     @Override
     public List<Release> getAllSingles(boolean isInCollection) {
         try(Connection con = sql2o.open()){
@@ -172,16 +173,16 @@ public class Sql2oReleaseDao implements ReleaseDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-
     }
 
     @Override
     public List<Release> getRecent() {
         try(Connection con = sql2o.open()){
-            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = true ORDER BY id DESC LIMIT 10")
+            return  con.createQuery("SELECT * FROM releases WHERE isInCollection = true ORDER BY id DESC LIMIT 9")
                     .executeAndFetch(Release.class);
         }
     }
+
     @Override
     public List<Release> getWishlist() {
         try(Connection con = sql2o.open()){
@@ -203,6 +204,14 @@ public class Sql2oReleaseDao implements ReleaseDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-
     }
+
+//    @Override
+//    public List<Release> search(String query) {
+//        try(Connection con = sql2o.open()){
+//            return con.createQuery("SELECT * FROM releases WHERE * LIKE :query")
+//                    .addParameter("query", "%"+ query +"%")
+//                    .executeAndFetch(Release.class);
+//        }
+//    }
 }
