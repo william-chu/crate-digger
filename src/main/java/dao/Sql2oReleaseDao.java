@@ -7,6 +7,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Sql2oReleaseDao implements ReleaseDao {
@@ -20,47 +21,54 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
+            List<Release> allReleasesWithoutNull = con.createQuery("SELECT * FROM releases WHERE isInCollection = :collectionBoolean")
                     .addParameter("collectionBoolean", true)
                     .executeAndFetch(Release.class);
+            allReleasesWithoutNull.removeAll(Collections.singleton(null));
+            return allReleasesWithoutNull;
         }
     }
 
+
     @Override
-    public List<Release> getAllEps() {
+    public List<Release> getAllEps(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :large OR mediaType = :small OR mediaType = :medium")
-                    .addParameter("large", "12\"")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR mediaType = :small OR mediaType = :medium")
+                    .addParameter("large", "12\" EP")
                     .addParameter("small", "EP")
                     .addParameter("medium", "10\"")
+                    .addParameter("isIn", isInCollection)
                     .executeAndFetch(Release.class);
         }
     }
 
     @Override
-    public List<Release> getAllLps() {
+    public List<Release> getAllLps(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :lp")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :lp")
                     .addParameter("lp", "LP")
+                    .addParameter("isIn", isInCollection)
                     .executeAndFetch(Release.class);
         }
     }
 
     @Override
-    public List<Release> getAllSingles() {
+    public List<Release> getAllSingles(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :large OR mediaType = :small")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR mediaType = :small")
                     .addParameter("large", "12\" Single")
                     .addParameter("small", "Single")
+                    .addParameter("isIn", isInCollection)
                     .executeAndFetch(Release.class);
         }
     }
 
     @Override
-    public List<Release> getAllSeventies() {
+    public List<Release> getAllSeventies(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = true AND mediaType = :rpm")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :rpm")
                     .addParameter("rpm", "78 RPM")
+                    .addParameter("isIn", isInCollection)
                     .executeAndFetch(Release.class);
         }
     }

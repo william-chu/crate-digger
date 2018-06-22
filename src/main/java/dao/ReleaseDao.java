@@ -17,11 +17,12 @@ public interface ReleaseDao {
     List<Release> getRecent();
     List<Release> getWishlist();
     List<Artist> getAllArtistsByReleaseId(int releaseId);
-    List<Release> getAllLps();
-    List<Release> getAllEps();
-    List<Release> getAllSingles();
-    List<Release> getAllSeventies();
+    List<Release> getAllLps(boolean isInCollection);
+    List<Release> getAllEps(boolean isInCollection);
+    List<Release> getAllSingles(boolean isInCollection);
+    List<Release> getAllSeventies(boolean isInCollection);
 //    List<Release> search(String query);
+
 
 
     // UPDATE

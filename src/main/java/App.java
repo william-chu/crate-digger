@@ -40,10 +40,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -68,10 +68,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -99,15 +99,131 @@ public class App {
             return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show singles in collection
+        get("/releases/singles", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> allReleases = releaseDao.getAllSingles(true);
+            model.put("releases", allReleases);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : allReleases) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show EPs in collection
+        get("/releases/EPs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> allReleases = releaseDao.getAllEps(true);
+            model.put("releases", allReleases);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : allReleases) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show LPs in collection
+        get("/releases/LPs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> allReleases = releaseDao.getAllLps(true);
+            model.put("releases", allReleases);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : allReleases) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show 78s in collection
+        get("/releases/78rpms", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> allReleases = releaseDao.getAllSeventies(true);
+            model.put("releases", allReleases);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : allReleases) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //get: show releases in wishlist
         get("/releases/wishlist", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -127,15 +243,131 @@ public class App {
             return new ModelAndView(model, "releases.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show singles in wishlist
+        get("/releases/wishlist/singles", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> wishlistSingles = releaseDao.getAllSingles(false);
+            model.put("wishlist", wishlistSingles);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlistSingles) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show EPs in wishlist
+        get("/releases/wishlist/EPs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> wishlistEps = releaseDao.getAllEps(false);
+            model.put("wishlist", wishlistEps);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlistEps) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show LPs in wishlist
+        get("/releases/wishlist/LPs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> wishlistLps = releaseDao.getAllLps(false);
+            model.put("wishlist", wishlistLps);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlistLps) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show 78s in wishlist
+        get("/releases/wishlist/78rpms", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Release> wishlist78s = releaseDao.getAllSeventies(false);
+            model.put("wishlist", wishlist78s);
+
+            Map<List<Artist>, Release> releasesWithArtists = new LinkedHashMap<>();
+            for (Release release : wishlist78s) {
+                List<Artist> releaseArtists = releaseDao.getAllArtistsByReleaseId(release.getId());
+                releasesWithArtists.put(releaseArtists, release);
+            }
+            model.put("releasesWithArtists", releasesWithArtists);
+            return new ModelAndView(model, "releases.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //get: show all artists
         get("/artists", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -154,10 +386,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -186,10 +418,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -249,10 +481,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -284,10 +516,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -321,10 +553,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
@@ -366,10 +598,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int releasesSize = releaseDao.getAll().size();
             int artistSize =  artistDao.getAll().size();
-            int singlesSize = releaseDao.getAllSingles().size();
-            int seventiesSize = releaseDao.getAllSeventies().size();
-            int epsSize = releaseDao.getAllEps().size();
-            int lpsSize = releaseDao.getAllLps().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
