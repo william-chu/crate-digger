@@ -410,6 +410,54 @@ public class App {
             return new ModelAndView(model, "artists.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show form for adding artist to release
+        get("/releases/:id/artists/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int releasesSize = releaseDao.getAll().size();
+            int artistSize =  artistDao.getAll().size();
+            int singlesSize = releaseDao.getAllSingles(true).size();
+            int seventiesSize = releaseDao.getAllSeventies(true).size();
+            int epsSize = releaseDao.getAllEps(true).size();
+            int lpsSize = releaseDao.getAllLps(true).size();
+            BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
+            model.put("releasesSize", releasesSize);
+            model.put("artistsSize", artistSize);
+            model.put("seventiesSize", seventiesSize);
+            model.put("singlesSize", singlesSize);
+            model.put("epsSize", epsSize);
+            model.put("lpsSize", lpsSize);
+            model.put("total", total);
+            List<Artist> allArtists = artistDao.getAll();
+            model.put("artists", allArtists);
+            int releaseId = Integer.parseInt(req.params("id"));
+            Release release = releaseDao.findById(releaseId);
+            model.put("release", release);
+            model.put("addArtist", true);
+            return new ModelAndView(model, "release-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post: process adding artist to release form
+        post("releases/:id/artists", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            List<Artist> allArtists = artistDao.getAll();
+            List<String> allArtistNames = new ArrayList<>();
+            for (Artist artist:allArtists) {
+                allArtistNames.add(artist.getName());
+            }
+            String artistName = req.queryParams("artistName");
+            String artistImageUrl = req.queryParams("artistImageUrl");
+            Artist newArtist = new Artist(artistName, artistImageUrl);
+            if (!allArtistNames.contains(newArtist.getName())) {
+                artistDao.add(newArtist);
+            }
+            Artist artist = artistDao.findByName(artistName);
+            int releaseId = Integer.parseInt(req.params("id"));
+            Release release = releaseDao.findById(releaseId);
+            artistDao.addArtistToRelease(artist, release);
+            res.redirect("/releases/" + release.getId());
+            return null;
+        }, new HandlebarsTemplateEngine());
+
         //get: show details and releases of single artist
         get("/artists/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();

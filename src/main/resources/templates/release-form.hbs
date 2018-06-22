@@ -16,8 +16,7 @@
             <button class="btn btn-submit" type="submit">Submit</button>
         </div>
     </form>
-
-    {{else if editRelease}}
+{{else if editRelease}}
     <form class="form-container" action="/releases/{{editRelease.id}}/update" method="post">
         <h2>Album</h2>
         <div class="form-group">
@@ -121,8 +120,7 @@
             <button class="btn btn-submit" type="submit">Submit</button>
         </div>
     </form>
-
-    {{else if addRelease}}
+{{else if addRelease}}
     <form action="/releases/{{addRelease.id}}/update" method="post">
         <h2>Album</h2>
         <div class="form-group" hidden>
@@ -219,6 +217,28 @@
         </div>
         <div class="d-flex justify-content-center">
             <a href="/releases/{{addRelease.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
+
+{{else if addArtist}}
+    <form class="form-container" action="/releases/{{release.id}}/artists" method="post">
+        <h2>Artist</h2>
+        <div class="form-group">
+            <label>Artist Name</label>
+            <input class="form-control" list="artist-list" name="artistName">
+            <datalist id="artist-list">
+                {{#each artists}}
+                <option value="{{name}}">
+                {{/each}}
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label>Artist Image URL</label>
+            <input class="form-control" type="text" name="artistImageUrl">
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/releases/{{release.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
             <button class="btn btn-submit" type="submit">Submit</button>
         </div>
     </form>
