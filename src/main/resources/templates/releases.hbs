@@ -14,8 +14,10 @@
     </div>
     <form>
         <div class="form-group d-flex">
-            <input class="form-control" type="text" name="search" value="">
-            <button class="btn btn-submit search" type="submit">Search</button>
+            <form action="/releases" method="get">
+                <input class="form-control" type="text" name="query" >
+                <button class="btn btn-submit search" type="submit">Search</button>
+            </form>
         </div>
     </form>
 </div>
@@ -48,8 +50,10 @@
     </div>
     <form>
         <div class="form-group d-flex">
-            <input class="form-control" type="text" name="search" value="">
-            <button class="btn btn-submit search" type="submit">Search</button>
+            <form action="/releases" method="get">
+                <input class="form-control" type="text" name="query" >
+                <button class="btn btn-submit search" type="submit">Search</button>
+            </form>
         </div>
     </form>
 </div>

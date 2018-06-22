@@ -216,14 +216,14 @@ public class Sql2oReleaseDao implements ReleaseDao {
             for ( Release release : releasesByTitle ) {
                 searchedReleases.add(release);
             }
-            List<Artist> artistsByName = con.createQuery("SELECT * FROM artists WHERE title LIKE :nameQuery")
+            List<Artist> artistsByName = con.createQuery("SELECT * FROM artists WHERE name LIKE :nameQuery")
                     .addParameter("nameQuery", "%"+ query +"%")
                     .executeAndFetch(Artist.class);
             for (Artist artist : artistsByName) {
                 int artistId = artist.getId();
                 List<Integer> releaseIdsByArtistId = con.createQuery("SELECT releaseId FROM artists_releases WHERE artistId = :artistId")
                         .addParameter("artistId", artistId)
-                        .executeAndFetch(int.class);
+                        .executeAndFetch(Integer.class);
                 for (int releaseId:releaseIdsByArtistId) {
                     List<Release> releasesByArtistsId = con.createQuery("SELECT * FROM releases WHERE id = :id")
                             .addParameter("id", releaseId)
