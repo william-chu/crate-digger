@@ -83,7 +83,6 @@ public class App {
             String query = req.queryParams("query");
             List<Release> allReleases;
 //            if(query != null) {
-//                allReleases = releaseDao.getAll();
 //                allReleases = releaseDao.search(query);
 //            } else {
                 allReleases = releaseDao.getAll();
@@ -144,7 +143,13 @@ public class App {
             model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
-            List<Artist> allArtists = artistDao.getAll();
+            String query = req.queryParams("query");
+            List<Artist> allArtists;
+//            if(query != null) {
+//                allArtists = artistDao.search(query);
+//            } else {
+            allArtists = artistDao.getAll();
+//            }
             model.put("artists", allArtists);
             return new ModelAndView(model, "artists.hbs");
         }, new HandlebarsTemplateEngine());

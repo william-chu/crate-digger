@@ -16,6 +16,7 @@ public interface ArtistDao {
     List<Release> getWishlistByArtistId(int artistId);
     Artist findById(int id);
     Artist findByName(String name);
+    List<Artist> search(String query);
 
     // UPDATE
     void update(int id, String name, String imageUrl);

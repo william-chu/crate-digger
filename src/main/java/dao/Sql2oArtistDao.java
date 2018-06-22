@@ -167,5 +167,14 @@ public class Sql2oArtistDao implements ArtistDao {
             System.out.println(ex);
         }
     }
+
+    @Override
+    public List<Artist> search(String query) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM artists WHERE name LIKE :query")
+                    .addParameter("query", "%"+ query +"%")
+                    .executeAndFetch(Artist.class);
+        }
+    }
 }
 

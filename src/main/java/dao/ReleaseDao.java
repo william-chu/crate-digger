@@ -21,7 +21,7 @@ public interface ReleaseDao {
     List<Release> getAllEps();
     List<Release> getAllSingles();
     List<Release> getAllSeventies();
-//    List<Release> search(String query);
+    List<Release> search(String query);
 
 
     // UPDATE
