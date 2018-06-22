@@ -44,7 +44,7 @@ public class Sql2oArtistDaoTest {
     }
 
     @Test
-    public void addingArtistSetsId() throws Exception{
+    public void add_addingArtistSetsId() throws Exception{
         Artist testArtist = setupNewArtist();
         int originalId = testArtist.getId();
         artistDao.add(testArtist);
@@ -70,10 +70,8 @@ public class Sql2oArtistDaoTest {
         releaseDao.add(testRelease);
         Release testRelease2 = setupNewRelease();
         releaseDao.add(testRelease2);
-
         artistDao.addArtistToRelease(testArtist, testRelease);
         artistDao.addArtistToRelease(testArtist, testRelease2);
-
         assertEquals(2, artistDao.getAllReleasesByArtistId(testArtist.getId()).size());
     }
 
@@ -113,18 +111,6 @@ public class Sql2oArtistDaoTest {
     }
 
     @Test
-    public void addArtistToRelease2(){
-        Artist testArtist = setupNewArtist();
-        artistDao.add(testArtist);
-        Release testRelease = setupNewRelease();
-        releaseDao.add(testRelease);
-        artistDao.addArtistToRelease(testArtist, testRelease);
-        assertEquals(1, releaseDao.getAllArtistsByReleaseId(testRelease.getId()).size());
-    }
-
-
-
-    @Test
     public void getAllReleasesByArtistId(){
         Artist testArtist = setupNewArtist();
         artistDao.add(testArtist);
@@ -138,5 +124,27 @@ public class Sql2oArtistDaoTest {
         assertEquals(1, artistDao.getAllReleasesByArtistId(testArtist.getId()).size());
     }
 
+    @Test
+    public void getAllWishlistByArtistId(){
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        Release testRelease2 = setupNewRelease();
+        testRelease2.setInCollection(false);
+        releaseDao.add(testRelease2);
+        artistDao.addArtistToRelease(testArtist, testRelease);
+        artistDao.addArtistToRelease(testArtist, testRelease2);
+        assertEquals(1, artistDao.getWishlistByArtistId(testArtist.getId()).size());
+    }
 
+    @Test
+    public void clearAll() {
+        Artist testArtist = setupNewArtist();
+        artistDao.add(testArtist);
+        Artist testArtist2 = setupNewArtist();
+        artistDao.add(testArtist2);
+        artistDao.clearAll();
+        assertEquals(0, artistDao.getAll().size());
+    }
 }
