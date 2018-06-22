@@ -142,7 +142,7 @@ public class Sql2oReleaseDaoTest {
         testRelease.setInCollection(true);
         testRelease.setMediaType("78 RPM");
         releaseDao.add(testRelease);
-        assertEquals(1, releaseDao.getAllSeventies().size());
+        assertEquals(1, releaseDao.getAllSeventies(true).size());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class Sql2oReleaseDaoTest {
         testRelease.setInCollection(true);
         testRelease.setMediaType("Single");
         releaseDao.add(testRelease);
-        assertEquals(1, releaseDao.getAllSingles().size());
+        assertEquals(1, releaseDao.getAllSingles(true).size());
     }
 
     @Test
@@ -160,7 +160,7 @@ public class Sql2oReleaseDaoTest {
         testRelease.setInCollection(true);
         testRelease.setMediaType("EP");
         releaseDao.add(testRelease);
-        assertEquals(1, releaseDao.getAllEps().size());
+        assertEquals(1, releaseDao.getAllEps(true).size());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class Sql2oReleaseDaoTest {
         testRelease.setInCollection(true);
         testRelease.setMediaType("LP");
         releaseDao.add(testRelease);
-        assertEquals(1, releaseDao.getAllLps().size());
+        assertEquals(1, releaseDao.getAllLps(true).size());
     }
 
     @Test

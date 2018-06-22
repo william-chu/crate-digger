@@ -2,8 +2,9 @@
 
 html, body {
   height: 100%;
-  min-width: 830px;
+  min-width: 860px;
   font-size: 100%;
+  word-wrap: break-word;
 }
 
 h1, h2, h3, h4, h5 ,h6 {
@@ -115,7 +116,7 @@ button {
 /* UI Dashboard - Navbar */
 
 .navbar {
-  min-width: 830px;
+  min-width: 860px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -133,6 +134,11 @@ button {
   text-transform: uppercase;
 }
 
+.button-primary {
+  background-color: #ff6372;
+  color: #fff;
+}
+
 .button-blue {
   background-color: #88b9b8;
   color: #fff;
@@ -144,7 +150,7 @@ button {
   color: #88b9b8;
 }
 
-.button-blue:hover {
+.button-blue:hover, .button-primary:hover  {
   color: #fff;
 }
 
@@ -156,11 +162,38 @@ button {
 
 .main {
   min-height: 100%;
-  padding: 100px 50px 50px;
+  padding: 70px 50px 50px;
   margin-left: 300px;
 }
 
 /* Collection Grid */
+
+#search-filters {
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search-artists {
+  width: 100%
+}
+
+#search-filters button {
+  margin: 0 3px;
+}
+
+#search-filters .btn-submit, #search-artists .btn-submit {
+  margin: 0 0 0 10px;
+}
+
+@media screen and (min-width: 1200px) {
+  #search-filters {
+    flex-direction: row;
+  }
+
+  #search-artists {
+    width: auto;
+  }
+}
 
 .collection-grid {
   display: grid;
@@ -265,7 +298,7 @@ button {
   margin-bottom: 15px;
 }
 
-.btn-edit, .btn-delete, .btn-mini-delete, .btn-collection {
+.btn-edit, .btn-delete, .btn-mini-delete, .btn-mini-add, .btn-collection {
   height: 30px;
   color: #fff;
   font-size: 0.75rem;
@@ -287,7 +320,15 @@ button {
   height: 20px;
   margin-left: 10px;
   padding: 0 5px;
-  background-color: #c7002e;
+  background-color: #ff6372;
+}
+
+.btn-mini-add {
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+  padding: 0;
+  background-color: #88b9b8;
 }
 
 .btn-collection {
