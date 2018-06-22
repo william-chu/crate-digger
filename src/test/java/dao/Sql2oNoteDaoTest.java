@@ -40,7 +40,7 @@ public class Sql2oNoteDaoTest {
     }
 
     @Test
-    public void addingNoteSetsId() {
+    public void add_addingNoteSetsId() {
         Note testNote = setupNewNote();
         int originalIdOfNote = testNote.getId();
         noteDao.add(testNote);

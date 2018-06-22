@@ -1,353 +1,353 @@
 {{#partial "content"}}
 
-    {{#if editArtist}}
-        <form class="form-container" action="/artists/{{editArtist.id}}/update" method="post">
-            <h2>Artist</h2>
-            <div class="form-group">
-                <label>Artist Name</label>
-                <input class="form-control" list="artist-list" name="artistName" value="{{editArtist.name}}">
-            </div>
-            <div class="form-group">
-                <label>Artist Image URL</label>
-                <input class="form-control" type="text" name="artistImageUrl" value="{{editArtist.imageUrl}}">
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="/artists/{{editArtist.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
-                <button class="btn btn-submit" type="submit">Submit</button>
-            </div>
-        </form>
+{{#if editArtist}}
+    <form class="form-container" action="/artists/{{editArtist.id}}/update" method="post">
+        <h2>Artist</h2>
+        <div class="form-group">
+            <label>Artist Name</label>
+            <input class="form-control" list="artist-list" name="artistName" value="{{editArtist.name}}">
+        </div>
+        <div class="form-group">
+            <label>Artist Image URL</label>
+            <input class="form-control" type="text" name="artistImageUrl" value="{{editArtist.imageUrl}}">
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/artists/{{editArtist.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
 
-        {{else if editRelease}}
-        <form class="form-container" action="/releases/{{editRelease.id}}/update" method="post">
-            <h2>Album</h2>
+    {{else if editRelease}}
+    <form class="form-container" action="/releases/{{editRelease.id}}/update" method="post">
+        <h2>Album</h2>
+        <div class="form-group">
+            <div class="form-check">
+                <input type="radio" name="isInCollection" value="true" checked>
+                <label>Collection</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="isInCollection" value="false">
+                <label>Wishlist</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Record Name</label>
+            <input class="form-control" type="text" name="title" value="{{editRelease.title}}">
+        </div>
+        <div class="form-group">
+            <label>Record Image URL</label>
+            <input class="form-control" type="text" name="releaseImageUrl" value="{{editRelease.imageUrl}}">
+        </div>
+        <div class="d-flex justify-content-between indent">
             <div class="form-group">
-                <div class="form-check">
-                    <input type="radio" name="isInCollection" value="true" checked>
-                    <label>Collection</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" name="isInCollection" value="false">
-                    <label>Wishlist</label>
-                </div>
+                <label>Record Label</label>
+                <input class="form-control" type="text" name="label" value="{{editRelease.label}}">
             </div>
             <div class="form-group">
-                <label>Album Name</label>
-                <input class="form-control" type="text" name="title" value="{{editRelease.title}}">
+                <label>Catalog Number</label>
+                <input class="form-control" type="text" name="labelNumber" value="{{editRelease.labelNumber}}">
+            </div>
+        </div>
+        <div class="d-flex justify-content-between indent">
+            <div class="form-group">
+                <label>Record Type</label>
+                <select class="custom-select form-control" name="mediaType" required>
+                    <option selected></option>
+                    <option value="Single">Single</option>
+                    <option value='12" Single'>12" Single</option>
+                    <option value='LP'>LP</option>
+                    <option value="EP">EP</option>
+                    <option value='12" EP'>12" EP</option>
+                    <option value='10"'>10"</option>
+                    <option value="78 RPM">78 RPM</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>Album Image URL</label>
-                <input class="form-control" type="text" name="releaseImageUrl" value="{{editRelease.imageUrl}}">
+                <label>Sleeve Type</label>
+                <select class="custom-select form-control" name="sleeveType" required>
+                    <option selected></option>
+                    <option value="Picture Sleeve">Picture Sleeve</option>
+                    <option value="Company Sleeve">Company Sleeve</option>
+                    <option value="Brown Sleeve">Brown Sleeve</option>
+                    <option value="LP Jacket">LP Jacket</option>
+                    <option value="Plain Sleeve">Plain Sleeve</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Record Label</label>
-                    <input class="form-control" type="text" name="label" value="{{editRelease.label}}">
-                </div>
-                <div class="form-group">
-                    <label>Catalog Number</label>
-                    <input class="form-control" type="text" name="labelNumber" value="{{editRelease.labelNumber}}">
-                </div>
+        </div>
+        <div class="d-flex justify-content-between indent">
+            <div class="form-group">
+                <label>Record Condition</label>
+                <select class="custom-select form-control" name="mediaCondition">
+                    <option selected value="0"></option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
             </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Media Type</label>
-                    <select class="custom-select form-control" name="mediaType" required>
-                        <option selected></option>
-                        <option value="Single">Single</option>
-                        <option value='12" Single'>12" Single</option>
-                        <option value='LP'>LP</option>
-                        <option value="EP">EP</option>
-                        <option value='12" EP'>12" EP</option>
-                        <option value='10"'>10"</option>
-                        <option value="78 RPM">78 RPM</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sleeve Type</label>
-                    <select class="custom-select form-control" name="sleeveType" required>
-                        <option selected></option>
-                        <option value="Picture Sleeve">Picture Sleeve</option>
-                        <option value="Company Sleeve">Company Sleeve</option>
-                        <option value="Brown Sleeve">Brown Sleeve</option>
-                        <option value="LP Jacket">LP Jacket</option>
-                        <option value="Plain Sleeve">Plain Sleeve</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label>Sleeve Condition</label>
+                <select class="custom-select form-control" name="sleeveCondition">
+                    <option selected value="0"></option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
             </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Media Condition</label>
-                    <select class="custom-select form-control" name="mediaCondition">
-                        <option selected value="0"></option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sleeve Condition</label>
-                    <select class="custom-select form-control" name="sleeveCondition">
-                        <option selected value="0"></option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <div class="form-group">
+                <label>Purchase Date</label>
+                <input class="form-control date-input" type="date" name="datePurchased" value="{{editRelease.datePurchased}}">
             </div>
-            <div class="d-flex justify-content-around">
-                <div class="form-group">
-                    <label>Purchase Date</label>
-                    <input class="form-control date-input" type="date" name="datePurchased" value="{{editRelease.datePurchased}}">
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input class="form-control" type="number" step=".01" name="price" value="{{editRelease.price}}">
-                </div>
-                <div class="form-group">
-                    <label>Seller</label>
-                    <input class="form-control" type="text" name="seller" value="{{editRelease.seller}}">
-                </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" type="number" step=".01" name="price" value="{{editRelease.price}}">
             </div>
-            <div class="d-flex justify-content-center">
-                <a href="/releases/{{editRelease.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
-                <button class="btn btn-submit" type="submit">Submit</button>
+            <div class="form-group">
+                <label>Seller</label>
+                <input class="form-control" type="text" name="seller" value="{{editRelease.seller}}">
             </div>
-        </form>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/releases/{{editRelease.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
 
-        {{else if addRelease}}
-        <form action="/releases/{{addRelease.id}}/update" method="post">
-            <h2>Album</h2>
+    {{else if addRelease}}
+    <form action="/releases/{{addRelease.id}}/update" method="post">
+        <h2>Album</h2>
+        <div class="form-group" hidden>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="isInCollection" value="true" checked>
+                <label class="form-check-label" for="inlineRadio1">Collection</label>
+            </div>
+        </div>
+        <div class="form-group" hidden>
+            <label>Record Name</label>
+            <input class="form-control" type="text" name="title" value="{{addRelease.title}}">
+        </div>
+        <div class="form-group" hidden>
+            <label>Record Image URL</label>
+            <input class="form-control" type="text" name="releaseImageUrl" value="{{addRelease.imageUrl}}">
+        </div>
+        <div class="d-flex justify-content-between indent">
             <div class="form-group" hidden>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="isInCollection" value="true" checked>
-                    <label class="form-check-label" for="inlineRadio1">Collection</label>
-                </div>
+                <label>Record Label</label>
+                <input class="form-control" type="text" name="label" value="{{addRelease.label}}">
             </div>
             <div class="form-group" hidden>
-                <label>Album Name</label>
-                <input class="form-control" type="text" name="title" value="{{addRelease.title}}">
+                <label>Catalog Number</label>
+                <input class="form-control" type="text" name="labelNumber" value="{{addRelease.labelNumber}}">
             </div>
-            <div class="form-group" hidden>
-                <label>Album Image URL</label>
-                <input class="form-control" type="text" name="releaseImageUrl" value="{{addRelease.imageUrl}}">
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group" hidden>
-                    <label>Record Label</label>
-                    <input class="form-control" type="text" name="label" value="{{addRelease.label}}">
-                </div>
-                <div class="form-group" hidden>
-                    <label>Catalog Number</label>
-                    <input class="form-control" type="text" name="labelNumber" value="{{addRelease.labelNumber}}">
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Media Type</label>
-                    <select class="custom-select" name="mediaType" required>
-                        <option selected>Choose...</option>
-                        <option value="Single">Single</option>
-                        <option value='12" Single'>12" Single</option>
-                        <option value='LP'>LP</option>
-                        <option value="EP">EP</option>
-                        <option value='12" EP'>12" EP</option>
-                        <option value='10"'>10"</option>
-                        <option value="78 RPM">78 RPM</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Media Condition</label>
-                    <select class="custom-select" name="mediaCondition">
-                        <option selected value="0">Choose...</option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Sleeve Type</label>
-                    <select class="custom-select" name="sleeveType" required>
-                        <option selected>Choose...</option>
-                        <option value="Picture Sleeve">Picture Sleeve</option>
-                        <option value="Company Sleeve">Company Sleeve</option>
-                        <option value="Brown Sleeve">Brown Sleeve</option>
-                        <option value="LP Jacket">LP Jacket</option>
-                        <option value="Plain Sleeve">Plain Sleeve</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sleeve Condition</label>
-                    <select class="custom-select" name="sleeveCondition">
-                        <option selected value="0">Choose...</option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-around">
-                <div class="form-group">
-                    <label>Purchase Date</label>
-                    <input class="form-control" type="date" name="datePurchased" value="{{addRelease.datePurchased}}">
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input class="form-control" type="number" step=".01" name="price" value="{{addRelease.price}}">
-                </div>
-                <div class="form-group">
-                    <label>Seller</label>
-                    <input class="form-control" type="text" name="seller" value="{{addRelease.seller}}">
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="/releases/{{addRelease.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
-                <button class="btn btn-submit" type="submit">Submit</button>
-            </div>
-        </form>
-    {{else}}
-        <h1 class="page-title">Add/Edit Album</h1>
-        <form class="form-container" action="/releases" method="post">
-            <h2>Artist</h2>
+        </div>
+        <div class="d-flex justify-content-between indent">
             <div class="form-group">
-                <label>Artist Name</label>
-                <input class="form-control" list="artist-list" name="artistName">
-                <datalist id="artist-list">
-                    {{#each artists}}
-                        <option value="{{name}}">
-                    {{/each}}
-                </datalist>
+                <label>Record Type</label>
+                <select class="custom-select" name="mediaType" required>
+                    <option selected>Choose...</option>
+                    <option value="Single">Single</option>
+                    <option value='12" Single'>12" Single</option>
+                    <option value='LP'>LP</option>
+                    <option value="EP">EP</option>
+                    <option value='12" EP'>12" EP</option>
+                    <option value='10"'>10"</option>
+                    <option value="78 RPM">78 RPM</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>Artist Image URL</label>
-                <input class="form-control" type="text" name="artistImageUrl">
+                <label>Record Condition</label>
+                <select class="custom-select" name="mediaCondition">
+                    <option selected value="0">Choose...</option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
             </div>
-            <!-- INNER FORM 1 - RELEASE SECTION -->
-            <h2>Album</h2>
+        </div>
+        <div class="d-flex justify-content-between indent">
             <div class="form-group">
-                <div class="form-check">
-                    <input type="radio" name="isInCollection" value="true" checked>
-                    <label for="inlineRadio1">Collection</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" name="isInCollection" value="false">
-                    <label for="inlineRadio2">Wishlist</label>
-                </div>
+                <label>Sleeve Type</label>
+                <select class="custom-select" name="sleeveType" required>
+                    <option selected>Choose...</option>
+                    <option value="Picture Sleeve">Picture Sleeve</option>
+                    <option value="Company Sleeve">Company Sleeve</option>
+                    <option value="Brown Sleeve">Brown Sleeve</option>
+                    <option value="LP Jacket">LP Jacket</option>
+                    <option value="Plain Sleeve">Plain Sleeve</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>Album Name</label>
-                <input class="form-control" type="text" name="title">
+                <label>Sleeve Condition</label>
+                <select class="custom-select" name="sleeveCondition">
+                    <option selected value="0">Choose...</option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <div class="form-group">
+                <label>Purchase Date</label>
+                <input class="form-control" type="date" name="datePurchased" value="{{addRelease.datePurchased}}">
             </div>
             <div class="form-group">
-                <label>Album Image URL</label>
-                <input class="form-control" type="text" name="releaseImageUrl">
+                <label>Price</label>
+                <input class="form-control" type="number" step=".01" name="price" value="{{addRelease.price}}">
             </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Record Label</label>
-                    <input class="form-control" type="text" name="label">
-                </div>
-                <div class="form-group">
-                    <label>Catalog Number</label>
-                    <input class="form-control" type="text" name="labelNumber">
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Media Type</label>
-                    <select class="custom-select form-control" name="mediaType" required>
-                        <option selected></option>
-                        <option value="Single">Single</option>
-                        <option value='12" Single'>12" Single</option>
-                        <option value='LP'>LP</option>
-                        <option value="EP">EP</option>
-                        <option value='12" EP'>12" EP</option>
-                        <option value='10"'>10"</option>
-                        <option value="78 RPM">78 RPM</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sleeve Type</label>
-                    <select class="custom-select form-control" name="sleeveType" required>
-                        <option selected></option>
-                        <option value="Picture Sleeve">Picture Sleeve</option>
-                        <option value="Company Sleeve">Company Sleeve</option>
-                        <option value="Brown Sleeve">Brown Sleeve</option>
-                        <option value="LP Jacket">LP Jacket</option>
-                        <option value="Plain Sleeve">Plain Sleeve</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between indent">
-                <div class="form-group">
-                    <label>Media Condition</label>
-                    <select class="custom-select form-control" name="mediaCondition">
-                        <option selected value="0"></option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sleeve Condition</label>
-                    <select class="custom-select form-control" name="sleeveCondition">
-                        <option selected value="0"></option>
-                        <option value="6">Near Mint</option>
-                        <option value="5">Very Good Plus</option>
-                        <option value="4">Very Good</option>
-                        <option value="3">Very Good Minus</option>
-                        <option value="2">Good</option>
-                        <option value="1">Poor</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex justify-content-around">
-                <div class="form-group">
-                    <label>Purchase Date</label>
-                    <input class="form-control date-input" type="date" name="datePurchased">
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input class="form-control" type="number" step=".01" name="price" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Seller</label>
-                    <input class="form-control" type="text" name="seller">
-                </div>
-            </div>
-                <!-- INNER FORM 2 - NOTES SECTION -->
             <div class="form-group">
-                <label>Notes</label>
-                <textarea class="form-control" rows="6" name="content"></textarea>
+                <label>Seller</label>
+                <input class="form-control" type="text" name="seller" value="{{addRelease.seller}}">
             </div>
-            <div class="d-flex justify-content-center">
-                <a href="/releases"><button class="btn btn-cancel" type="button">Cancel</button></a>
-                <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/releases/{{addRelease.id}}"><button class="btn btn-cancel" type="button">Cancel</button></a>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
+{{else}}
+    <h1 class="page-title">Add/Edit Album</h1>
+    <form class="form-container" action="/releases" method="post">
+        <h2>Artist</h2>
+        <div class="form-group">
+            <label>Artist Name</label>
+            <input class="form-control" list="artist-list" name="artistName">
+            <datalist id="artist-list">
+                {{#each artists}}
+                    <option value="{{name}}">
+                {{/each}}
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label>Artist Image URL</label>
+            <input class="form-control" type="text" name="artistImageUrl">
+        </div>
+        <!-- INNER FORM 1 - RELEASE SECTION -->
+        <h2>Album</h2>
+        <div class="form-group">
+            <div class="form-check">
+                <input type="radio" name="isInCollection" value="true" checked>
+                <label for="inlineRadio1">Collection</label>
             </div>
-        </form>
-    {{/if}}
+            <div class="form-check">
+                <input type="radio" name="isInCollection" value="false">
+                <label for="inlineRadio2">Wishlist</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Record Name</label>
+            <input class="form-control" type="text" name="title">
+        </div>
+        <div class="form-group">
+            <label>Record Image URL</label>
+            <input class="form-control" type="text" name="releaseImageUrl">
+        </div>
+        <div class="d-flex justify-content-between indent">
+            <div class="form-group">
+                <label>Record Label</label>
+                <input class="form-control" type="text" name="label">
+            </div>
+            <div class="form-group">
+                <label>Catalog Number</label>
+                <input class="form-control" type="text" name="labelNumber">
+            </div>
+        </div>
+        <div class="d-flex justify-content-between indent">
+            <div class="form-group">
+                <label>Record Type</label>
+                <select class="custom-select form-control" name="mediaType" required>
+                    <option selected></option>
+                    <option value="Single">Single</option>
+                    <option value='12" Single'>12" Single</option>
+                    <option value='LP'>LP</option>
+                    <option value="EP">EP</option>
+                    <option value='12" EP'>12" EP</option>
+                    <option value='10"'>10"</option>
+                    <option value="78 RPM">78 RPM</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Sleeve Type</label>
+                <select class="custom-select form-control" name="sleeveType" required>
+                    <option selected></option>
+                    <option value="Picture Sleeve">Picture Sleeve</option>
+                    <option value="Company Sleeve">Company Sleeve</option>
+                    <option value="Brown Sleeve">Brown Sleeve</option>
+                    <option value="LP Jacket">LP Jacket</option>
+                    <option value="Plain Sleeve">Plain Sleeve</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between indent">
+            <div class="form-group">
+                <label>Record Condition</label>
+                <select class="custom-select form-control" name="mediaCondition">
+                    <option selected value="0"></option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Sleeve Condition</label>
+                <select class="custom-select form-control" name="sleeveCondition">
+                    <option selected value="0"></option>
+                    <option value="6">Near Mint</option>
+                    <option value="5">Very Good Plus</option>
+                    <option value="4">Very Good</option>
+                    <option value="3">Very Good Minus</option>
+                    <option value="2">Good</option>
+                    <option value="1">Poor</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <div class="form-group">
+                <label>Purchase Date</label>
+                <input class="form-control date-input" type="date" name="datePurchased">
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" type="number" step=".01" name="price" value="0">
+            </div>
+            <div class="form-group">
+                <label>Seller</label>
+                <input class="form-control" type="text" name="seller">
+            </div>
+        </div>
+            <!-- INNER FORM 2 - NOTES SECTION -->
+        <div class="form-group">
+            <label>Notes</label>
+            <textarea class="form-control" rows="6" name="content"></textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/releases"><button class="btn btn-cancel" type="button">Cancel</button></a>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
+{{/if}}
 
 {{/partial}}
 

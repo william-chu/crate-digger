@@ -45,6 +45,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
                     .executeAndFetch(Release.class);
         }
     }
+
     @Override
     public List<Release> getAllSingles() {
         try(Connection con = sql2o.open()){
@@ -164,7 +165,6 @@ public class Sql2oReleaseDao implements ReleaseDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-
     }
 
     @Override
@@ -174,6 +174,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
                     .executeAndFetch(Release.class);
         }
     }
+
     @Override
     public List<Release> getWishlist() {
         try(Connection con = sql2o.open()){
@@ -195,7 +196,6 @@ public class Sql2oReleaseDao implements ReleaseDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-
     }
 
 //    @Override

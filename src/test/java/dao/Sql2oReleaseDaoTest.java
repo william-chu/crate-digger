@@ -45,7 +45,7 @@ public class Sql2oReleaseDaoTest {
     }
 
     @Test
-    public void addingReleaseSetsId() {
+    public void add_addingReleaseSetsId() {
         Release testRelease = setupNewRelease();
         int originalId = testRelease.getId();
         releaseDao.add(testRelease);
@@ -125,7 +125,7 @@ public class Sql2oReleaseDaoTest {
         releaseDao.add(testRelease8);
         releaseDao.add(testRelease9);
         releaseDao.add(testRelease10);
-        assertEquals(10, releaseDao.getRecent().size());
+        assertEquals(9, releaseDao.getRecent().size());
     }
 
     @Test
@@ -142,7 +142,55 @@ public class Sql2oReleaseDaoTest {
         testRelease.setInCollection(true);
         testRelease.setMediaType("78 RPM");
         releaseDao.add(testRelease);
-        releaseDao.getAllSeventies();
+        assertEquals(1, releaseDao.getAllSeventies().size());
     }
 
+    @Test
+    public void getAllSingles() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(true);
+        testRelease.setMediaType("Single");
+        releaseDao.add(testRelease);
+        assertEquals(1, releaseDao.getAllSingles().size());
+    }
+
+    @Test
+    public void getAllEps() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(true);
+        testRelease.setMediaType("EP");
+        releaseDao.add(testRelease);
+        assertEquals(1, releaseDao.getAllEps().size());
+    }
+
+    @Test
+    public void getAllLps() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(true);
+        testRelease.setMediaType("LP");
+        releaseDao.add(testRelease);
+        assertEquals(1, releaseDao.getAllLps().size());
+    }
+
+    @Test
+    public void getTotalValue() {
+        Release testRelease = setupNewRelease();
+        testRelease.setInCollection(true);
+        releaseDao.add(testRelease);
+        Release testRelease2 = setupNewRelease();
+        testRelease2.setInCollection(true);
+        releaseDao.add(testRelease2);
+        int expectedTotal = testRelease.getPrice() + testRelease2.getPrice();
+        assertEquals(expectedTotal, releaseDao.getTotalValue());
+    }
+
+    @Test
+    public void clearAll() {
+        Release testRelease = setupNewRelease();
+        releaseDao.add(testRelease);
+        Release testRelease2 = setupNewRelease();
+        releaseDao.add(testRelease2);
+        releaseDao.clearAll();
+        assertEquals(0, releaseDao.getAll().size());
+    }
 }

@@ -25,7 +25,6 @@ public class App {
         return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
-
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
@@ -204,6 +203,47 @@ public class App {
             return new ModelAndView(model, "release-form.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //post: process new artist/release form
+        post("/releases", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            List<Artist> allArtists = artistDao.getAll();
+            List<String> allArtistNames = new ArrayList<>();
+            for (Artist artist:allArtists) {
+                allArtistNames.add(artist.getName());
+            }
+            String artistName = req.queryParams("artistName");
+            String artistImageUrl = req.queryParams("artistImageUrl");
+            Artist newArtist = new Artist(artistName, artistImageUrl);
+            if (!allArtistNames.contains(newArtist.getName())) {
+                artistDao.add(newArtist);
+            }
+            Artist artist = artistDao.findByName(artistName);
+            String title = req.queryParams("title");
+            String label = req.queryParams("label");
+            String labelNumber = req.queryParams("labelNumber");
+            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
+            String sleeveType = req.queryParams("sleeveType");
+            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
+            String seller = req.queryParams("seller");
+            String mediaType = req.queryParams("mediaType");
+            int price = (int)(Double.parseDouble(req.queryParams("price"))*100);
+            String datePurchased = req.queryParams("datePurchased");
+            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
+            String releaseImageUrl = req.queryParams("releaseImageUrl");
+            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, releaseImageUrl);
+            releaseDao.add(newRelease);
+            Release release = releaseDao.findById(newRelease.getId());
+            artistDao.addArtistToRelease(artist, release);
+            String content = req.queryParams("content");
+            int releaseId = release.getId();
+            Note newNote = new Note(content, releaseId);
+            if (!newNote.getContent().equals("")) {
+                noteDao.add(newNote);
+            }
+            res.redirect("/releases");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
         //get: show details of specific release
         get("/releases/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -273,47 +313,6 @@ public class App {
             Artist newArtist = new Artist(name, imageUrl);
             artistDao.update(idOfArtistToFind, name,imageUrl);
             res.redirect("/artists/" + idOfArtistToFind);
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-        //post: process new release form !!!!!!!
-        post("/releases", (req, res) -> { //new
-            Map<String, Object> model = new HashMap<>();
-            List<Artist> allArtists = artistDao.getAll();
-            List<String> allArtistNames = new ArrayList<>();
-            for (Artist artist:allArtists) {
-                allArtistNames.add(artist.getName());
-            }
-            String artistName = req.queryParams("artistName");
-            String artistImageUrl = req.queryParams("artistImageUrl");
-            Artist newArtist = new Artist(artistName, artistImageUrl);
-            if (!allArtistNames.contains(newArtist.getName())) {
-                artistDao.add(newArtist);
-            }
-            Artist artist = artistDao.findByName(artistName);
-            String title = req.queryParams("title");
-            String label = req.queryParams("label");
-            String labelNumber = req.queryParams("labelNumber");
-            int mediaCondition = Integer.parseInt(req.queryParams("mediaCondition"));
-            String sleeveType = req.queryParams("sleeveType");
-            int sleeveCondition = Integer.parseInt(req.queryParams("sleeveCondition"));
-            String seller = req.queryParams("seller");
-            String mediaType = req.queryParams("mediaType");
-            int price = (int)(Double.parseDouble(req.queryParams("price"))*100);
-            String datePurchased = req.queryParams("datePurchased");
-            boolean isInCollection = Boolean.parseBoolean(req.queryParams("isInCollection"));
-            String releaseImageUrl = req.queryParams("releaseImageUrl");
-            Release newRelease = new Release(title, label, labelNumber, mediaCondition, sleeveType, sleeveCondition, seller, mediaType, price, datePurchased, isInCollection, releaseImageUrl);
-            releaseDao.add(newRelease);
-            Release release = releaseDao.findById(newRelease.getId());
-            artistDao.addArtistToRelease(artist, release);
-            String content = req.queryParams("content");
-            int releaseId = release.getId();
-            Note newNote = new Note(content, releaseId);
-            if (!newNote.getContent().equals("")) {
-                noteDao.add(newNote);
-            }
-            res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -407,7 +406,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        // get:delete specific artist
+        // get: delete specific artist
         get("/artists/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfArtistToDelete = Integer.parseInt(req.params("id"));
@@ -424,7 +423,6 @@ public class App {
             res.redirect("/releases");
             return null;
         }, new HandlebarsTemplateEngine());
-
 
         //post: process form to add new note
         post("/releases/:id/notes", (req, res) -> {

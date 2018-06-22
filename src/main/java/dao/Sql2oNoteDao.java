@@ -17,15 +17,6 @@ public class Sql2oNoteDao implements NoteDao {
     }
 
     @Override
-    public List<Note> getAllByReleaseId(int id) {
-        try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM notes WHERE releaseId = :id ORDER BY id DESC")
-                    .addParameter("id", id)
-                    .executeAndFetch(Note.class);
-        }
-    }
-
-    @Override
     public void add(Note note) {
         String sql = "INSERT INTO notes (content, postedAt, releaseId) VALUES (:content, :postedAt, :releaseId)";
         try (Connection con = sql2o.open()) {
@@ -37,7 +28,15 @@ public class Sql2oNoteDao implements NoteDao {
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
+    }
 
+    @Override
+    public List<Note> getAllByReleaseId(int id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM notes WHERE releaseId = :id ORDER BY id DESC")
+                    .addParameter("id", id)
+                    .executeAndFetch(Note.class);
+        }
     }
 
     @Override
@@ -91,6 +90,5 @@ public class Sql2oNoteDao implements NoteDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-
     }
 }

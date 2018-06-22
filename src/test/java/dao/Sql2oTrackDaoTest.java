@@ -38,7 +38,15 @@ public class Sql2oTrackDaoTest {
         conn.close();
         System.out.println("connection closed");
     }
-    
+
+
+    @Test
+    public void add_addingTrackSetsId() {
+        Track testTrack = setupNewTrack();
+        int originalIdOfTrack = testTrack.getId();
+        trackDao.add(testTrack);
+        assertNotEquals(originalIdOfTrack, testTrack.getId());
+    }
 
     @Test
     public void getAllByReleaseId() {
@@ -52,18 +60,21 @@ public class Sql2oTrackDaoTest {
     }
 
     @Test
-    public void add() {
+    public void findById() {
         Track testTrack = setupNewTrack();
-        int originalIdOfTrack = testTrack.getId();
+        Track testTrack2 = new Track("Cool dude track", 2);
+        Track testTrack3 = new Track("whatever song", 1);
         trackDao.add(testTrack);
-        assertNotEquals(originalIdOfTrack, testTrack.getId());
+        trackDao.add(testTrack2);
+        trackDao.add(testTrack3);
+        assertEquals("whatever song", trackDao.findById(testTrack3.getId()).getTitle());
     }
 
     @Test
     public void update() {
         Track testTrack = setupNewTrack();
         trackDao.add(testTrack);
-        trackDao.update(1, "cool man track");
+        trackDao.update(testTrack.getId(), "cool man track");
         List<Track> foundTracks = trackDao.getAllByReleaseId(1);
         assertEquals("cool man track", foundTracks.get(0).getTitle());
     }
@@ -83,5 +94,16 @@ public class Sql2oTrackDaoTest {
         trackDao.add(testTrack);
         trackDao.clearAllTracksByRelesaseId(testTrack.getReleaseId());
         assertEquals(0, trackDao.getAllByReleaseId(1).size());
+    }
+
+    @Test
+    public void clearAll() {
+        Track testTrack = setupNewTrack();
+        trackDao.add(testTrack);
+        Track testTrack2 = new Track("Cool dude track", 2);
+        trackDao.add(testTrack2);
+        trackDao.clearAll();
+        assertEquals(0, trackDao.getAllByReleaseId(1).size());
+        assertEquals(0, trackDao.getAllByReleaseId(2).size());
     }
 }

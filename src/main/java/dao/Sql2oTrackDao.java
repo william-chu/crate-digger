@@ -15,15 +15,6 @@ public class Sql2oTrackDao implements TrackDao {
     }
 
     @Override
-    public List<Track> getAllByReleaseId(int id) {
-        try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM tracks WHERE releaseId = :id")
-                    .addParameter("id", id)
-                    .executeAndFetch(Track.class);
-        }
-    }
-
-    @Override
     public void add(Track track) {
         String sql = "INSERT INTO tracks (title, releaseId) VALUES (:title, :releaseId)";
         try (Connection con = sql2o.open()) {
@@ -34,6 +25,15 @@ public class Sql2oTrackDao implements TrackDao {
             track.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List<Track> getAllByReleaseId(int id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM tracks WHERE releaseId = :id")
+                    .addParameter("id", id)
+                    .executeAndFetch(Track.class);
         }
     }
 
