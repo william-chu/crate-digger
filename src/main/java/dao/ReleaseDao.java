@@ -21,9 +21,7 @@ public interface ReleaseDao {
     List<Release> getAllEps(boolean isInCollection);
     List<Release> getAllSingles(boolean isInCollection);
     List<Release> getAllSeventies(boolean isInCollection);
-//    List<Release> search(String query);
-
-
+    List<Release> search(String query);
 
     // UPDATE
     void update(int id, String title, String label, String labelNumber, int mediaCondition, String sleeveType, int sleeveCondition, String seller, String mediaType, int price, String datePurchased, boolean isInCollection, String imageUrl);

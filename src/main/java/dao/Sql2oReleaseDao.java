@@ -206,12 +206,34 @@ public class Sql2oReleaseDao implements ReleaseDao {
         }
     }
 
-//    @Override
-//    public List<Release> search(String query) {
-//        try(Connection con = sql2o.open()){
-//            return con.createQuery("SELECT * FROM releases WHERE * LIKE :query")
-//                    .addParameter("query", "%"+ query +"%")
-//                    .executeAndFetch(Release.class);
-//        }
-//    }
+    @Override
+    public List<Release> search(String query) {
+        try(Connection con = sql2o.open()){
+            List<Release> searchedReleases = new ArrayList<>();
+            List<Release> releasesByTitle = con.createQuery("SELECT * FROM releases WHERE title LIKE :titleQuery")
+                    .addParameter("titleQuery", "%"+ query +"%")
+                    .executeAndFetch(Release.class);
+            for ( Release release : releasesByTitle ) {
+                searchedReleases.add(release);
+            }
+            List<Artist> artistsByName = con.createQuery("SELECT * FROM artists WHERE title LIKE :nameQuery")
+                    .addParameter("nameQuery", "%"+ query +"%")
+                    .executeAndFetch(Artist.class);
+            for (Artist artist : artistsByName) {
+                int artistId = artist.getId();
+                List<Integer> releaseIdsByArtistId = con.createQuery("SELECT releaseId FROM artists_releases WHERE artistId = :artistId")
+                        .addParameter("artistId", artistId)
+                        .executeAndFetch(int.class);
+                for (int releaseId:releaseIdsByArtistId) {
+                    List<Release> releasesByArtistsId = con.createQuery("SELECT * FROM releases WHERE id = :id")
+                            .addParameter("id", releaseId)
+                            .executeAndFetch(Release.class);
+                    for (Release release:releasesByArtistsId) {
+                        searchedReleases.add(release);
+                    }
+                }
+            }
+            return searchedReleases;
+        }
+    }
 }
