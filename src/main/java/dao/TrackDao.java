@@ -5,13 +5,12 @@ import models.Track;
 import java.util.List;
 
 public interface TrackDao {
-    // LIST
-    List<Track> getAllByReleaseId(int id);
-    Track findById(int id);
-
     // CREATE
     void add(Track track);
 
+    // READ
+    List<Track> getAllByReleaseId(int id);
+    Track findById(int id);
 
     // UPDATE
     void update(int id, String title);
