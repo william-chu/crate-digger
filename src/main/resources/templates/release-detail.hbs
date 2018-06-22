@@ -9,6 +9,9 @@
         <div class="col-12 col-lg-6 col-xl-4 detail-main-panel">
             <div class="detail-cover-image"><img src="{{release.imageUrl}}"></div>
             <h1 class="page-title">{{release.title}}</h1>
+            <h6><strong>RECORD LABEL</strong>: {{release.label}}</h6>
+            <h6><strong>CATALOG NBR</strong>: {{release.labelNumber}}</h6>
+            <h6 class="d-flex align-items-center"><strong>ARTISTS</strong><a href="#add-artist-to-record"><button class="btn btn-mini-add" type="submit">+</button></a></h6>
             <div>
                 {{#each artists}}
                     <a class="d-flex justify-content-start align-items-center" href="/artists/{{id}}">
@@ -17,7 +20,6 @@
                     </a>
                 {{/each}}
             </div>
-            <h6>{{release.label}} {{release.labelNumber}}</h6>
             <h3>Tracks</h3>
             <ol class="track-list">
                 {{#each tracks}}
@@ -85,6 +87,9 @@
         <div class="col-12 col-lg-6 col-xl-4 detail-main-panel">
             <div class="detail-cover-image"><img src="{{release.imageUrl}}"></div>
             <h1 class="page-title">{{release.title}}</h1>
+            <h6><strong>RECORD LABEL</strong>: {{release.label}}</h6>
+            <h6><strong>CATALOG NBR</strong>: {{release.labelNumber}}</h6>
+            <h6 class="d-flex align-items-center"><strong>ARTISTS</strong><a href="#add-artist-to-record"><button class="btn btn-mini-add" type="submit">+</button></a></h6>
             <div>
                 {{#each artists}}
                     <a class="d-flex justify-content-start align-items-center" href="/artists/{{id}}">
@@ -93,7 +98,6 @@
                     </a>
                 {{/each}}
             </div>
-            <h6>{{release.label}} {{release.labelNumber}}</h6>
             <h3>Tracks</h3>
             <ol class="track-list">
                 {{#each tracks}}
