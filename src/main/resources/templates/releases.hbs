@@ -1,35 +1,75 @@
 {{#partial "content"}}
 
-<div class="collection-grid">
-    {{#if wishlist}}
-        {{#each releasesWithArtists}}
-            <div class="album">
-                <a href="/releases/{{@key.id}}">
-                    <img src="{{@key.imageUrl}}">
-                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                        {{#each this}}
-                            <h4>{{name}}</h4>
-                        {{/each}}
-                        <p>{{@key.title}}</p>
-                    </div>
-                </a>
-            </div>
-        {{/each}}
-    {{else}}
-        {{#each releasesWithArtists}}
-            <div class="album">
-                <a href="/releases/{{@key.id}}"><img src="{{@key.imageUrl}}">
-                    <div class="overlay d-flex justify-content-center align-items-center flex-column">
-                        {{#each this}}
-                            <h4>{{name}}</h4>
-                        {{/each}}
-                        <p>{{@key.title}}</p>
-                    </div>
-                </a>
-            </div>
-        {{/each}}
-    {{/if}}
+
+{{#if wishlist}}
+<h1 class="page-title text-center">Wishlist</h1>
+
+<div id="search-filters" class="d-flex justify-content-between">
+    <div class="form-group d-flex justify-content-center">
+        <a href="#"><button class="btn button-hollow">All</button></a>
+        <a href="#"><button class="btn button-hollow">Single</button></a>
+        <a href="#"><button class="btn button-hollow">LP</button></a>
+        <a href="#"><button class="btn button-hollow">EP</button></a>
+        <a href="#"><button class="btn button-hollow">78 RPM</button></a>
+    </div>
+    <form>
+        <div class="form-group d-flex">
+            <input class="form-control" type="text" name="search" value="">
+            <button class="btn btn-submit search" type="submit">Search</button>
+        </div>
+    </form>
 </div>
+
+<div class="collection-grid">
+    {{#each releasesWithArtists}}
+        <div class="album">
+            <a href="/releases/{{@key.id}}">
+                <img src="{{@key.imageUrl}}">
+                <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                    {{#each this}}
+                        <h4>{{name}}</h4>
+                    {{/each}}
+                    <p>{{@key.title}}</p>
+                </div>
+            </a>
+        </div>
+    {{/each}}
+</div>
+{{else}}
+<h1 class="page-title text-center">Collection</h1>
+
+<div id="search-filters" class="d-flex justify-content-between">
+    <div class="form-group d-flex justify-content-center">
+        <a href="#"><button class="btn button-hollow">All</button></a>
+        <a href="#"><button class="btn button-hollow">Single</button></a>
+        <a href="#"><button class="btn button-hollow">LP</button></a>
+        <a href="#"><button class="btn button-hollow">EP</button></a>
+        <a href="#"><button class="btn button-hollow">78 RPM</button></a>
+    </div>
+    <form>
+        <div class="form-group d-flex">
+            <input class="form-control" type="text" name="search" value="">
+            <button class="btn btn-submit search" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="collection-grid">
+    {{#each releasesWithArtists}}
+        <div class="album">
+            <a href="/releases/{{@key.id}}"><img src="{{@key.imageUrl}}">
+                <div class="overlay d-flex justify-content-center align-items-center flex-column">
+                    {{#each this}}
+                        <h4>{{name}}</h4>
+                    {{/each}}
+                    <p>{{@key.title}}</p>
+                </div>
+            </a>
+        </div>
+    {{/each}}
+</div>
+{{/if}}
+
 
 {{/partial}}
 
