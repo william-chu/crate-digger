@@ -7,36 +7,48 @@
 
 ## Description
 
-This application will allow users to add and update records to a personal collection.
+This application will allow users to create, read, update, and delete records in a personal collection database.
 
 For Sketch wireframe and prototype design see https://github.com/m-chu/crate-digger-design
 
 #### User Story
 
-A. As a user, I want to see all records in my collection<br>
-B. As a user, I want to see one individual record with record details such as the artist, format, condition, etc...<br>
-C. As a user, I want to see all records by a specific artist<br>
-D. As a user, I want to be able to leave a note on a record<br>
-E. As a user, I want to see all notes for a record<br>
+A. As a user, I want to add a record to my collection<br>
+B. As a user, I want to add a record to my wishlist<br>
+C. As a user, I want to see all records in my collection<br>
+D. As a user, I want to see all records in my wishlist<br>
+E. As a user, I want to see one individual record with record details such as the artist, format, condition, etc...<br>
 F. As a user, I want to be able to add an artist to the database<br>
-G. As a user, I want to edit an artist's details when they change<br>
-H. As a user, I want to be able to add a record to the database<br>
-I. As a user, I want to edit a record's details<br>
-J. As a user, I want to delete notes that are no longer relevant<br>
-K. As a user, I want to be able to add tracks to a record<br>
-L. As a user, I want to see all records in my wishlist<br>
-M. As a user, I want to be able to add records to my wishlist<br>
+G. As a user, I want to see all artists with records in my collection<br>
+H. As a user, I want to see details about a specific artist<br>
+I. As a user, I want to see all records in my collection/wantlist by a specific artist<br>
+J. As a user, I want to be able to leave a note on a record<br>
+K. As a user, I want to see all notes for a record<br>
+L. As a user, I want to be able to add a track to a record<br>
+M. As a user, I want to see all tracks for a record<br>
+N. As a user, I want to be able to add an additional artist to a release<br>
+O. As a user, I want to edit an artist's details<br>
+P. As a user, I want to edit a record's details<br>
+Q. As a user, I want to add a record from my wishlist to my collection<br>
+R. As a user, I want to delete notes that are no longer relevant<br>
+S. As a user, I want to be able to delete tracks from a record<br>
+T. As a user, I want to be able to delete a record<br>
+U. As a user, I want to be able to delete an artist only if they have no associated records<br>
+V. As a user, I wnat to be able to delete an artist from a record (unfinished)
 
 <!-- ## Data relationship
 ![alt tag](screenshots/data.png "Data Model") -->
 
 ## Setup/Installation Requirements
 
-
+* View program by cloning repository from https://github.com/mattfmiller/event-planning
+* Open project in IDE such as IntelliJ IDEA
+* Run App.java to compile the program
+* Navigate to localhost:4567/ in browser to interact with program
 
 ## Known Bugs
 
-* N/A
+* Wishlist filters default to collection when there is nothing in wishlist that matches the selected filter.
 
 ## Support and contact details
 
