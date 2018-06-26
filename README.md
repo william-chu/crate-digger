@@ -48,7 +48,8 @@ V. As a user, I wnat to be able to delete an artist from a record (unfinished)
 
 ## Known Bugs
 
-* Wishlist filters default to collection when there is nothing in wishlist that matches the selected filter.
+* Cannot remove artists from a release
+* Cannot add secondary artist to release when database contains single artist
 
 ## Support and contact details
 
