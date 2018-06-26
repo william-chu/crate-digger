@@ -313,14 +313,14 @@ public class App {
             int artistSize =  artistDao.getAll().size();
             int singlesSize = releaseDao.getAllSingles(true).size();
             int seventiesSize = releaseDao.getAllSeventies(true).size();
-            int epsSize = releaseDao.getAllEps(true).size();
+//            int epsSize = releaseDao.getAllEps(true).size();
             int lpsSize = releaseDao.getAllLps(true).size();
             BigDecimal total = new BigDecimal(releaseDao.getTotalValue()).movePointLeft(2);
             model.put("releasesSize", releasesSize);
             model.put("artistsSize", artistSize);
             model.put("seventiesSize", seventiesSize);
             model.put("singlesSize", singlesSize);
-            model.put("epsSize", epsSize);
+//            model.put("epsSize", epsSize);
             model.put("lpsSize", lpsSize);
             model.put("total", total);
             String query = req.queryParams("query");

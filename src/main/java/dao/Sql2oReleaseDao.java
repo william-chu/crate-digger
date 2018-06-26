@@ -33,7 +33,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAllEps(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR mediaType = :small OR mediaType = :medium")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR isInCollection = :isIn AND mediaType = :small OR isInCollection = :isIn AND mediaType = :medium")
                     .addParameter("large", "12\" EP")
                     .addParameter("small", "EP")
                     .addParameter("medium", "10\"")
@@ -55,7 +55,7 @@ public class Sql2oReleaseDao implements ReleaseDao {
     @Override
     public List<Release> getAllSingles(boolean isInCollection) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR mediaType = :small")
+            return con.createQuery("SELECT * FROM releases WHERE isInCollection = :isIn AND mediaType = :large OR isInCollection = :isIn AND mediaType = :small")
                     .addParameter("large", "12\" Single")
                     .addParameter("small", "Single")
                     .addParameter("isIn", isInCollection)
