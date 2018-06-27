@@ -1,16 +1,13 @@
 
 # Crate Digger
 
-#### An app that allows users to track a personal record collection. (_This is an Epicodus exercise that is a work in progress_)
-
 #### By _**Matt Miller, Matt Dowdney, Mike Chu, and William Chu**_
 
 ## Description
 
-https://crate-digger2.herokuapp.com/
 This application will allow users to create, read, update, and delete records in a personal collection database.
 
-For Sketch wireframe and prototype design see https://github.com/m-chu/crate-digger-design
+For Sketch wireframe and prototype design see https://github.com/william-chu/crate-digger-design
 
 #### User Story
 
@@ -44,7 +41,7 @@ V. As a user, I wnat to be able to delete an artist from a record (unfinished)
 
 * To view live app, visit https://crate-digger2.herokuapp.com/
 
-* To view program locally, cloning repository from https://github.com/mattfmiller/event-planning
+* To view program locally, cloning repository from https://github.com/william-chu/epicodus-week15
 * Open project in IDE such as IntelliJ IDEA
 * Enter `psql < create.sql` in the command line.
 * Run App.java to compile the program
@@ -54,10 +51,6 @@ V. As a user, I wnat to be able to delete an artist from a record (unfinished)
 
 * Cannot remove artists from a release
 * Cannot add secondary artist to release when database contains single artist
-
-## Support and contact details
-
-For support, contact: matt.f.miller@live.com, theofficialmatt@gmail.com, williamchu51@gmail.com, mcihkue@gmail.com
 
 ## Technologies Used
 
